@@ -3,13 +3,13 @@ const makeTask = ({
     description = 'Make my dreams come true',
     dueDate = 'No due date',
     priority = 'Priority 1',
-    comment = 'Never give up!'
+    project = 'Never give up!'
 } = {}) => ({
     title,
     description,
     dueDate,
     priority,
-    comment
+    project
 });
 
 export default makeTask
