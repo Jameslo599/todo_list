@@ -6,6 +6,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist',
+    watchContentBase: true
   },
   output: {
     filename: 'main.js',

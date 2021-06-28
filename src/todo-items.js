@@ -1,9 +1,9 @@
 const makeTask = ({
-    title = 'Unnamed',
-    description = 'No description',
+    title = 'Grind',
+    description = 'Make my dreams come true',
     dueDate = 'No due date',
-    priority = 'Priority 4',
-    comment = 'No comment'
+    priority = 'Priority 1',
+    comment = 'Never give up!'
 } = {}) => ({
     title,
     description,
