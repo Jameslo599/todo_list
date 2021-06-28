@@ -30,10 +30,6 @@ body {
     margin: 0;
 }
 
-.pile {
-    
-}
-
 .list {
     text-align: center;
     font-size: 30px;
@@ -78,8 +74,8 @@ body {
 .newTask {
     background: #FFFFFF;
     border: 1px solid #888;
-    width: 30%;
-    height: 40%;
+    width: fit-content;
+    height: fit-content;
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
@@ -97,21 +93,45 @@ body {
 }
 
 .modalBody {
-    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    width: auto;
 }
 
-.modalTitle {
+#descriptionInput {
+    width: 200px;
+}
+
+#priorityInput {
+    width: 260px;
+}
+
+#project {
+    margin-top: 10px;
+}
+
+#projectInput {
+    width: 260px;
+}
+
+.input {
+    margin-top: 10px;
+}
+
+.left-side {
     padding: 20px 0 0 20px;
-    height: 20%;
 }
 
-.titleInput {
-
+.right-side {
+    padding: 20px 20px 0 0;
 }
 
-.date {
-    padding: 20px 0 0 20px;
-    height: 20%;
+#buttonHolder {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.button {
+    padding: 6px 12px;
+    margin-right: 20px;
 }
