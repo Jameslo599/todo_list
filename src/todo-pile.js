@@ -18,8 +18,15 @@ const makePile = () => {
     
     let task = makeElement({type: 'li', id: 'task', 
     className: 'task'});
-    task.innerHTML = 'james'
+    task.innerHTML = 'Add Task ';
     taskList.appendChild(task);
+
+    let taskLink = makeElement({type: 'a', href: '#'});
+    task.appendChild(taskLink);
+
+    let taskIcon = makeElement({type: 'i', id: 'taskIcon', 
+    className: 'fal fa-plus-circle'});
+    taskLink.appendChild(taskIcon);
 };
 
 export {makePile, makeTitle}

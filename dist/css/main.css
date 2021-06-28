@@ -37,7 +37,7 @@ body {
 
 .sidenav {
     height: 100%; 
-    width: 160px; 
+    width: 300px; 
     position: fixed; 
     z-index: 1; 
     left: 0;
@@ -56,6 +56,12 @@ body {
 
 .sidenav a:hover {
     background-color: #ffffff;
+}
+
+.task {
+    list-style: none;
+    padding-right: 200px;
+    font-size: 20px;
 }
 
 .modalContainer {
