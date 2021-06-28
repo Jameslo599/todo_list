@@ -4,10 +4,12 @@ const makeElement = ({
     type,
     id = '',
     className = '',
+    href = '',
 } = {}) => {
     let element = document.createElement(type);
     element.setAttribute('id', id);
     element.setAttribute('class', className);
+    element.setAttribute('href', href);
     return element;
 };
 
