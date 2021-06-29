@@ -18,14 +18,14 @@ let makeNavbar = () => {
     className: 'navbar'});
     content.appendChild(navBar);
 
+    let navLogo = makeElement({type: 'i', id: 'navLogo', 
+    className: 'far fa-check-square'});
+    navBar.appendChild(navLogo);
+
     let navItems = makeElement({ type: 'li', id: 'nav', 
     className: 'nav'});
     navItems.innerHTML = 'To-Do List'
     navBar.appendChild(navItems);
-
-    let navLogo = makeElement({type: 'i', id: 'navLogo', 
-    className: 'far fa-check-square'});
-    navBar.appendChild(navLogo);
 
     let taskLink = makeElement({type: 'a', href: '#'});
     navBar.appendChild(taskLink);
