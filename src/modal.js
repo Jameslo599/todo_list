@@ -114,8 +114,13 @@ const addTask = () => {
 const toggleModal = () => {
     const {modalContainer, cancel, closeIcon} = addTask();
     let button = document.getElementById("taskIcon");
+    let navButton = document.getElementById('navTask');
 
     button.onclick = function() {
+        modalContainer.style.display = "block";
+    };
+
+    navButton.onclick = function() {
         modalContainer.style.display = "block";
     };
 
