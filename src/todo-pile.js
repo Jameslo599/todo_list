@@ -27,11 +27,6 @@ const makePile = () => {
     let taskIcon = makeElement({type: 'i', id: 'taskIcon', 
     className: 'fal fa-plus-circle'});
     taskLink.appendChild(taskIcon);
-
-    //let task1 = makeElement({type: 'li', id: 'task', 
-    //className: 'task'});
-    //task1.innerHTML = 'Add Task1 ';
-    //taskList.prepend(task1);
 };
 
 export {makePile, makeTitle}

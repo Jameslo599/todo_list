@@ -69,10 +69,10 @@ const addTask = () => {
         let choosePriority = makeElement({ type: 'option', id: `priority${i}`});
         priorityInput.appendChild(choosePriority);
     };
-    document.getElementById('priority0').innerHTML = 'Priority 1'
-    document.getElementById('priority1').innerHTML = 'Priority 2'
-    document.getElementById('priority2').innerHTML = 'Priority 3'
-    document.getElementById('priority3').innerHTML = 'Priority 4'
+    document.getElementById('priority0').innerHTML = 'ASAP'
+    document.getElementById('priority1').innerHTML = 'High'
+    document.getElementById('priority2').innerHTML = 'Medium'
+    document.getElementById('priority3').innerHTML = 'Low'
 
     let project = makeElement({ type: 'div', id: 'project', 
     className: 'right-side'});
@@ -108,9 +108,8 @@ const addTask = () => {
     submission.innerHTML = 'Add Task';
     buttonHolderRight.appendChild(submission);
 
-    return {modalContainer, cancel, closeIcon};
+    return {modalContainer, cancel, closeIcon, submission};
 };
-
 
 const toggleModal = () => {
     const {modalContainer, cancel, closeIcon} = addTask();
@@ -137,4 +136,4 @@ const toggleModal = () => {
 
 
 
-export { addTask, toggleModal}
+export {addTask, toggleModal}

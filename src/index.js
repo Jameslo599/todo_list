@@ -1,5 +1,5 @@
 import { formatDistance, subDays } from 'date-fns'
-import makeTask from './todo-items.js'
+import {submitTask} from './todo-items.js'
 import {makeNavbar} from './header.js'
 import {makePile, makeTitle} from './todo-pile.js'
 import {makeSidebar} from './sidebar.js'
@@ -11,3 +11,4 @@ makePile();
 makeSidebar();
 toggleModal();
 addTask();
+submitTask();
