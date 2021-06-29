@@ -19,7 +19,20 @@ body {
 
 .navbar > li {
     display: inline-block;
-    padding: 0 25px 0 25px;
+    padding: 0 7px 0 55px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+#navLogo {
+    font-size: 30px;
+}
+
+#navTask {
+    float: right;
+    font-size: 30px;
+    font-weight: lighter;
+    margin: 3px 70px;
 }
 
 #grid {
@@ -88,7 +101,7 @@ body {
     border: 1px solid #888;
     width: fit-content;
     height: fit-content;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -101,6 +114,7 @@ body {
     width: fit-content;
     border: solid;
     list-style: none;
+    margin-bottom: 20px;
 }
 
 .property {
