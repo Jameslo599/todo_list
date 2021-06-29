@@ -65,7 +65,7 @@ body {
 }
 
 .modalContainer {
-    display: block;
+    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -96,6 +96,12 @@ body {
     border-color: grey;
     margin: 0;
     box-sizing: border-box;
+}
+
+#closeIcon {
+    float: right;
+    padding: 0 20px;
+    font-size: 20px;
 }
 
 .modalBody {
