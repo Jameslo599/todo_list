@@ -1,4 +1,5 @@
 import {makeElement} from './header.js'
+import { endOfDay, format } from 'date-fns'
 
 const addTask = () => {
     let modalContainer = makeElement({ type: 'div', id: 'modalContainer', 
@@ -43,6 +44,8 @@ const addTask = () => {
     let dateInput = makeElement({ type: 'input', id: 'dateInput', 
     className: 'input'});
     dateInput.type = 'datetime-local'
+    //dateInput.min = '2021-10-06T22:22:55'
+    dateInput.min = `${format(new Date(), 'yyyy-MM-dd\'T\'HH:mm')}`;
     date.appendChild(dateInput);
 
     let description = makeElement({ type: 'div', id: 'description', 

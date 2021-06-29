@@ -1,4 +1,5 @@
 import {makeElement} from './header.js'
+import { format } from 'date-fns'
 
 const makeTask = ({
     title = 'Grind',
@@ -28,6 +29,7 @@ let loadTasks = () => {
 
 let submitTask = () => {
     document.getElementById('submission').addEventListener('click', () => {
+        let localTime = document.getElementById("dateInput").value;
         for (let i = (myTasks.length-1); i < myTasks.length; i++) {
             let newTask = makeElement({type: 'li', id: `createdTask${i}`, 
         className: 'createdTask'});
@@ -47,11 +49,13 @@ let submitTask = () => {
         document.getElementById(`createdTask${i}`).appendChild(description);
         document.getElementById(`description${i}`).innerHTML = `Description: ${myTasks[i].description}`;
         document.getElementById(`createdTask${i}`).appendChild(taskDate);
-        document.getElementById(`taskDate${i}`).innerHTML = `Date: ${document.getElementById("dateInput").value}`;
+        document.getElementById(`taskDate${i}`).innerHTML = `Date: ${format(new Date(localTime), 'PPpp')}`;
         document.getElementById(`createdTask${i}`).appendChild(taskPriority);
         document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${myTasks[i].priority}`;
         };
     });
 };
+
+
 
 export {makeTask, submitTask, loadTasks}
