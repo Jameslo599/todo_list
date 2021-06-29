@@ -14,6 +14,13 @@ const addTask = () => {
     header.innerHTML = 'New Task'
     newTask.appendChild(header);
 
+    let closeLink = makeElement({type: 'a', href: '#'});
+    header.appendChild(closeLink);
+
+    let closeIcon = makeElement({type: 'i', id: 'closeIcon', 
+    className: 'fas fa-times'});
+    closeLink.appendChild(closeIcon);
+
     let body = makeElement({ type: 'div', id: 'modalBody', 
     className: 'modalBody'});
     newTask.appendChild(body);
@@ -100,29 +107,34 @@ const addTask = () => {
     className: 'button'});
     submission.innerHTML = 'Add Task';
     buttonHolderRight.appendChild(submission);
+
+    return {modalContainer, cancel, closeIcon};
 };
 
 
-//
-//let modal = document.getElementById("modalContainer");
-//let button = document.getElementById("newBook");
-//let span = document.getElementById("close");
-//button.onclick = function() {
-//    modal.style.display = "block";
-//};
-//span.onclick = function() {
-//    modal.style.display = "none";
-//};
-//
-//window.onclick = function(event) {
-//    if (event.target == modal) {
-//        modal.style.display = "none";
-//        document.getElementById("author").value = "";
-//        document.getElementById("title").value = "";
-//        document.getElementById("pages").value = "";
-//        checkBox.checked = false;
-//    }
-//}
-//
+const toggleModal = () => {
+    const {modalContainer, cancel, closeIcon} = addTask();
+    let button = document.getElementById("taskIcon");
 
-export default addTask
+    button.onclick = function() {
+        modalContainer.style.display = "block";
+    };
+
+    cancel.onclick = function() {
+        modalContainer.style.display = "none";
+    };
+
+    closeIcon.onclick = function() {
+        modalContainer.style.display = "none";
+    };
+
+    window.onclick = function(event) {
+        if (event.target == modalContainer) {
+            modalContainer.style.display = "none";
+        };
+    };
+};
+
+
+
+export { addTask, toggleModal}
