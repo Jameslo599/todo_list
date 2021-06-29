@@ -6,7 +6,11 @@ body {
 
 .navbar {
     background-color: #797979;
+    width: 100%;
+    position: fixed;
     color: #FFFFFF;
+    z-index: 1;
+    top: 0;
     list-style: none;
     text-align: left;
     padding: 20px 0 20px 0;
@@ -28,22 +32,24 @@ body {
     font-size: 40px;
     height: 100%;
     margin: 0;
+    padding-top: 100px;
 }
 
 .list {
-    text-align: center;
+    text-align: -webkit-center;
     font-size: 30px;
 }
 
 .sidenav {
     height: 100%; 
-    width: 300px; 
+    width: 200px; 
     position: fixed; 
-    z-index: 1; 
     left: 0;
     background-color: rgb(124, 174, 231); 
     overflow-x: hidden; 
-    padding-top: 20px;
+    padding-top: 90px;
+    padding-left: 40px;
+    line-height: 40px;
 }
 
 .sidenav a {
@@ -85,6 +91,22 @@ body {
     margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.createdTask {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 20px;
+    justify-items: center;
+    width: fit-content;
+    border: solid;
+    list-style: none;
+}
+
+.property {
+    list-style: none;
+    padding-right: 200px;
+    font-size: 14px;
 }
 
 .modalHeader {
