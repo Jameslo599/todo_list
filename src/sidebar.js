@@ -1,4 +1,4 @@
-import {makeElement} from './header.js'
+import {makeElement} from './make-items.js'
 
 const grid = document.getElementById('grid');
 

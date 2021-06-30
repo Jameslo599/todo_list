@@ -1,12 +1,12 @@
-import {makeElement} from './header.js'
-import { endOfDay, format } from 'date-fns'
+import {makeElement} from './make-items.js'
+import { format } from 'date-fns'
 
 const addTask = () => {
     let modalContainer = makeElement({ type: 'div', id: 'modalContainer', 
     className: 'modalContainer'});
     content.appendChild(modalContainer);
 
-    let newTask = makeElement({ type: 'form', id: 'newTask', 
+    let newTask = makeElement({ type: 'div', id: 'newTask', 
     className: 'newTask'});
     modalContainer.appendChild(newTask);
 
@@ -22,7 +22,7 @@ const addTask = () => {
     className: 'fas fa-times'});
     closeLink.appendChild(closeIcon);
 
-    let body = makeElement({ type: 'div', id: 'modalBody', 
+    let body = makeElement({ type: 'form', id: 'modalBody', 
     className: 'modalBody'});
     newTask.appendChild(body);
 
@@ -105,10 +105,11 @@ const addTask = () => {
     cancel.innerHTML = 'Cancel';
     buttonHolderRight.appendChild(cancel);
 
-    let submission = makeElement({ type: 'button', id: 'submission', 
+    let submission = makeElement({ type: 'input', id: 'submission', 
     className: 'button'});
+    submission.type = 'submit'
     submission.innerHTML = 'Add Task';
-    buttonHolderRight.appendChild(submission);
+    newTask.appendChild(submission);
 
     return {modalContainer, cancel, closeIcon, submission};
 };
@@ -143,4 +144,4 @@ const toggleModal = () => {
 
 
 
-export {addTask, toggleModal}
+export default toggleModal

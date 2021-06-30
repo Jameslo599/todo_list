@@ -1,17 +1,6 @@
-const content = document.getElementById('content');
+import {makeElement} from './make-items.js'
 
-const makeElement = ({
-    type,
-    id = '',
-    className = '',
-    href = '',
-} = {}) => {
-    let element = document.createElement(type);
-    element.setAttribute('id', id);
-    element.setAttribute('class', className);
-    element.setAttribute('href', href);
-    return element;
-};
+const content = document.getElementById('content');
 
 let makeNavbar = () => {
     let navBar = makeElement({ type: 'ul', id: 'navbar', 
@@ -35,4 +24,4 @@ let makeNavbar = () => {
     taskLink.appendChild(addTask);
 };
 
-export {makeElement, makeNavbar};
+export {makeNavbar};

@@ -1,4 +1,4 @@
-import {makeElement} from './header.js'
+import {makeElement} from './make-items.js'
 import {grid} from './sidebar.js'
 
 const makeTitle = () => {
