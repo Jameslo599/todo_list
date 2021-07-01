@@ -128,7 +128,7 @@ body {
 }
 
 .createdTask--active { background: #555555;}
-.createdTask--active::after { content: '\25be';}
+.createdTask--active::after { content: '\25b4';}
 
 .createdHolder {
     display: grid;
