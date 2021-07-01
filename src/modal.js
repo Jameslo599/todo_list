@@ -6,7 +6,7 @@ const addTask = () => {
     className: 'modalContainer'});
     content.appendChild(modalContainer);
 
-    let newTask = makeElement({ type: 'div', id: 'newTask', 
+    let newTask = makeElement({ type: 'form', id: 'newTask', 
     className: 'newTask'});
     modalContainer.appendChild(newTask);
 
@@ -22,7 +22,7 @@ const addTask = () => {
     className: 'fas fa-times'});
     closeLink.appendChild(closeIcon);
 
-    let body = makeElement({ type: 'form', id: 'modalBody', 
+    let body = makeElement({ type: 'div', id: 'modalBody', 
     className: 'modalBody'});
     newTask.appendChild(body);
 
@@ -34,6 +34,7 @@ const addTask = () => {
     let titleInput = makeElement({ type: 'input', id: 'titleInput', 
     className: 'input'});
     titleInput.type = 'text'
+    titleInput.required = true;
     title.appendChild(titleInput);
 
     let date = makeElement({ type: 'div', id: 'date', 
@@ -45,6 +46,7 @@ const addTask = () => {
     className: 'input'});
     dateInput.type = 'datetime-local'
     dateInput.min = `${format(new Date(), 'yyyy-MM-dd\'T\'HH:mm')}`;
+    dateInput.required = true;
     date.appendChild(dateInput);
 
     let description = makeElement({ type: 'div', id: 'description', 
@@ -56,6 +58,7 @@ const addTask = () => {
     className: 'input'});
     descriptionInput.rows = '6';
     descriptionInput.cols = '21';
+    descriptionInput.required = true;
     description.appendChild(descriptionInput);
 
     let priority = makeElement({ type: 'div', id: 'priority', 
@@ -109,7 +112,8 @@ const addTask = () => {
     className: 'button'});
     submission.type = 'submit'
     submission.innerHTML = 'Add Task';
-    newTask.appendChild(submission);
+    submission.href = '';
+    buttonHolderRight.appendChild(submission);
 
     return {modalContainer, cancel, closeIcon, submission};
 };
@@ -136,6 +140,7 @@ const toggleModal = () => {
     };
 
     window.onclick = function(event) {
+        //event.preventDefault();
         if (event.target == modalContainer) {
             modalContainer.style.display = "none";
         };

@@ -3,8 +3,9 @@ import { format } from 'date-fns'
 
 let myTasks = [];
 
+
 let loadTasks = () => {
-    document.getElementById('submission').addEventListener('submit', () => {
+    document.getElementById('newTask').addEventListener('submit', (event) => {
         let submission = makeTask({
             title: `${document.getElementById("titleInput").value}`,
             description: `${document.getElementById("descriptionInput").value}`,
@@ -14,10 +15,10 @@ let loadTasks = () => {
 })};
 
 let submitTask = () => {
-    document.getElementById('submission').addEventListener('submit', () => {
+    document.getElementById('newTask').addEventListener('submit', (event) => {
         let localTime = document.getElementById("dateInput").value;
         document.getElementById("titleInput").required = true;
-        document.getElementById("dateInput").required = true;
+        //document.getElementById("dateInput").required = true;
         for (let i = (myTasks.length-1); i < myTasks.length; i++) {
             let newTask = makeElement({type: 'button', id: `createdTask${i}`, 
         className: 'createdTask'});
@@ -60,8 +61,7 @@ let submitTask = () => {
         document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${myTasks[i].priority}`;
         
         };
-    });
-};
+    })};
 
 
 
