@@ -47,6 +47,14 @@ body {
     padding-top: 100px;
 }
 
+#title {
+    display: block;
+}
+
+#today {
+    display: none;
+}
+
 .list {
     text-align: -webkit-center;
     font-size: 30px;

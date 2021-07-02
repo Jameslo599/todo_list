@@ -89,11 +89,11 @@ const addTask = () => {
     project.appendChild(projectInput);
 
     for (let i = 0; i <= 1; i++) {
-        let chooseProject = makeElement({ type: 'option', id: `project${i}`});
+        let chooseProject = makeElement({ type: 'option', id: `projectChoice${i}`});
         projectInput.appendChild(chooseProject);
     };
-    document.getElementById('project0').innerHTML = 'Inbox'
-    document.getElementById('project1').innerHTML = 'Project'
+    document.getElementById('projectChoice0').innerHTML = 'Inbox'
+    document.getElementById('projectChoice1').innerHTML = 'Project'
 
     let buttonHolderLeft = makeElement({ type: 'div', id: 'buttonHolder', 
     className: 'left-side'});
@@ -103,15 +103,14 @@ const addTask = () => {
     className: 'right-side'});
     body.appendChild(buttonHolderRight);
 
-    let cancel = makeElement({ type: 'button', id: 'cancel', 
+    let cancel = makeElement({ type: 'input', id: 'cancel', 
     className: 'button'});
-    cancel.innerHTML = 'Cancel';
+    cancel.type = 'reset'
     buttonHolderRight.appendChild(cancel);
 
     let submission = makeElement({ type: 'input', id: 'submission', 
     className: 'button'});
     submission.type = 'submit'
-    submission.innerHTML = 'Add Task';
     submission.href = '';
     buttonHolderRight.appendChild(submission);
 
@@ -121,9 +120,14 @@ const addTask = () => {
 const toggleModal = () => {
     const {modalContainer, cancel, closeIcon} = addTask();
     let button = document.getElementById("taskIcon");
+    let todayButton = document.getElementById("todayIcon");
     let navButton = document.getElementById('navTask');
 
     button.onclick = function() {
+        modalContainer.style.display = "block";
+    };
+
+    todayButton.onclick = function() {
         modalContainer.style.display = "block";
     };
 

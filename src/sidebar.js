@@ -15,7 +15,6 @@ const makeSidebar = () => {
     document.getElementById('project0').innerHTML = 'Inbox';
     document.getElementById('project1').innerHTML = 'Today';
     document.getElementById('project2').innerHTML = 'Projects';
-
 };
 
 export {grid, makeSidebar}
