@@ -5,6 +5,7 @@ const makeTitle = () => {
     let title = makeElement({type: 'h2', id: 'title', 
     className: 'title'});
     title.innerHTML = 'Inbox'
+    title.style.display = 'block'
     grid.prepend(title);
 };
 const makeToday = () => {
