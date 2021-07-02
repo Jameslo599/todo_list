@@ -72,16 +72,22 @@ body {
     line-height: 40px;
 }
 
-.sidenav a {
-    padding: 6px 8px 6px 16px;
+.sidenav button {
+    width: 100%;
     text-decoration: none;
+    margin-bottom: 20px;
     font-size: 25px;
     color: #000000;
     display: block;
+    border: none;
 }
 
-.sidenav a:hover {
+.sidenav button:hover {
     background-color: #ffffff;
+}
+
+.project {
+    background-color: inherit;
 }
 
 .task {
@@ -148,6 +154,31 @@ body {
     transition: max-height 0.2s;
     background: #eeeeee;
     margin-bottom: 20px;
+}
+
+.project2 {
+    outline: none;
+    background-color: inherit;
+    text-align: left;
+    transition: background 0.2s;
+}
+
+.project2::after {
+    content: '\25be';
+    float: right;
+    padding: 0 20px 10px 0;
+    transform: scale(1.5);
+}
+
+.project2--active { background: #555555;}
+.project2--active::after { content: '\25b4';}
+
+#projectList {
+    display: grid;
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s;
 }
 
 .modalHeader {
