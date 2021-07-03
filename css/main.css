@@ -12,8 +12,9 @@ body {
     z-index: 1;
     top: 0;
     list-style: none;
-    text-align: left;
-    padding: 20px 0 20px 0;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
     margin: 0;
 }
 
@@ -24,6 +25,12 @@ body {
     font-weight: bolder;
 }
 
+#hamburger {
+    font-size: 30px;
+    float: left;
+    margin-right: 25px;
+    padding-top: 2px;
+}
 #navLogo {
     font-size: 30px;
     padding-left: 20px;
@@ -58,11 +65,13 @@ body {
 .list {
     text-align: -webkit-center;
     font-size: 30px;
+    padding: 0;
 }
 
 .sidenav {
     height: 100%; 
-    width: 200px; 
+    max-width: 200px; 
+    transition: max-width 0.2s;
     position: fixed; 
     left: 0;
     background-color: rgb(124, 174, 231); 
@@ -72,13 +81,18 @@ body {
     line-height: 40px;
 }
 
+.sidenav--active {
+    max-width: 0;
+    padding-left: 0;
+}
+
 .sidenav button {
     width: 100%;
     text-decoration: none;
     margin-bottom: 20px;
     font-size: 25px;
     color: #000000;
-    display: block;
+    display: flex;
     border: none;
 }
 
@@ -169,19 +183,17 @@ body {
 
 .project2::after {
     content: '\25be';
-    float: right;
+    margin-left: 20px;
     padding: 0 20px 10px 0;
-    transform: scale(1.5);
+    transform: scale(1);
 }
 
 .project2--active { background: #555555;}
 .project2--active::after { content: '\25b4';}
 
 #projectList {
-    display: grid;
-    grid-template-columns: 1fr;
-    overflow: hidden;
     max-height: 0;
+    overflow: hidden;
     transition: max-height 0.2s;
 }
 
