@@ -6,6 +6,7 @@ let myTasks = [];
 
 let loadTasks = () => {
     document.getElementById('newTask').addEventListener('submit', (event) => {
+        event.preventDefault();
         let submission = makeTask({
             title: `${document.getElementById("titleInput").value}`,
             description: `${document.getElementById("descriptionInput").value}`,
@@ -16,6 +17,7 @@ let loadTasks = () => {
 
 let submitTask = () => {
     document.getElementById('newTask').addEventListener('submit', (event) => {
+        event.preventDefault();
         let localTime = document.getElementById("dateInput").value;
         for (let i = (myTasks.length-1); i < myTasks.length; i++) {
             let newTask = makeElement({type: 'button', id: `createdTask${i}`, 
@@ -46,9 +48,9 @@ let submitTask = () => {
             let taskPriority = makeElement({ type: 'p', id: `taskPriority${i}`,
         className: 'property'});
         
-        if (document.getElementById('title').style.display === 'block') {
-            document.getElementById('list').insertBefore(newTask, document.getElementById('list').lastChild);
-            document.getElementById('list').insertBefore(contentHolder, document.getElementById('list').lastChild);
+        if (document.getElementById('inbox').style.display === 'block') {
+            document.getElementById('inboxList').insertBefore(newTask, document.getElementById('inboxList').lastChild);
+            document.getElementById('inboxList').insertBefore(contentHolder, document.getElementById('inboxList').lastChild);
         } else if (document.getElementById('today').style.display === 'block') {
             document.getElementById('todayList').insertBefore(newTask, document.getElementById('todayList').lastChild);
         document.getElementById('todayList').insertBefore(contentHolder, document.getElementById('todayList').lastChild);

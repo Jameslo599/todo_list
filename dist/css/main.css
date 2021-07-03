@@ -40,14 +40,14 @@ body {
     display: grid;
 }
 
-.title {
+.lists {
     text-align: center;
     font-size: 40px;
     margin: 0;
     padding-top: 100px;
 }
 
-#title {
+#inbox {
     display: block;
 }
 
@@ -88,6 +88,10 @@ body {
 
 .project {
     background-color: inherit;
+}
+
+.inputBar {
+    width: 75%;
 }
 
 .task {

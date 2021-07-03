@@ -17,8 +17,9 @@ const makeSidebar = () => {
     document.getElementById('project2').innerHTML = 'Projects';
     let projectList = makeElement({type: 'div', id: `projectList`, 
     className: 'project', href: '#'});
-    projectList.innerHTML = 'Projects';
+    let inputForm = makeElement({type: 'form', id: `projectForm`,});
     sidebar.appendChild(projectList);
+    projectList.appendChild(inputForm);
 };
 
 const showAllProjects = () => {
@@ -34,7 +35,34 @@ const showAllProjects = () => {
                 } else {
                     projectContent.style.maxHeight = 0;
                 };
-    })
+    }); 
 };
 
-export {grid, makeSidebar, showAllProjects}
+const makeProjectList = () => {
+    let inputBar = makeElement({type: 'input', id: `inputBar`, 
+    className: 'inputBar', href: '#'});
+    inputBar.type = 'text';
+    inputBar.placeholder = 'Add Project'
+
+    let approvedProject = makeElement({type: 'input', id: `approvedProject`, 
+    className: 'approvedProject', href: '#'});
+    approvedProject.type = 'submit';
+
+    let rejectedProject = makeElement({ type: 'input', id: 'rejectedProject', 
+    className: 'rejectedProject'});
+    rejectedProject.type = 'reset'
+
+    document.getElementById('projectForm').appendChild(inputBar);
+    document.getElementById('projectForm').appendChild(approvedProject);
+    document.getElementById('projectForm').appendChild(rejectedProject );
+
+}
+
+const addProject = () => {
+    document.getElementById('projectForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        document.getElementById('projectForm').reset();
+    });
+};
+
+export {grid, makeSidebar, showAllProjects, makeProjectList, addProject}

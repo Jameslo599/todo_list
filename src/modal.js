@@ -111,7 +111,7 @@ const addTask = () => {
     let submission = makeElement({ type: 'input', id: 'submission', 
     className: 'button'});
     submission.type = 'submit'
-    submission.href = '';
+    submission.value = 'Add Task';
     buttonHolderRight.appendChild(submission);
 
     return {modalContainer, cancel, closeIcon, submission};
@@ -119,17 +119,7 @@ const addTask = () => {
 
 const toggleModal = () => {
     const {modalContainer, cancel, closeIcon} = addTask();
-    let button = document.getElementById("taskIcon");
-    let todayButton = document.getElementById("todayIcon");
     let navButton = document.getElementById('navTask');
-
-    button.onclick = function() {
-        modalContainer.style.display = "block";
-    };
-
-    todayButton.onclick = function() {
-        modalContainer.style.display = "block";
-    };
 
     navButton.onclick = function() {
         modalContainer.style.display = "block";
@@ -144,7 +134,6 @@ const toggleModal = () => {
     };
 
     window.onclick = function(event) {
-        //event.preventDefault();
         if (event.target == modalContainer) {
             modalContainer.style.display = "none";
         };
