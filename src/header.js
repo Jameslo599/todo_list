@@ -7,6 +7,20 @@ let makeNavbar = () => {
     className: 'navbar'});
     content.appendChild(navBar);
 
+    let hamburgerLink = makeElement({type: 'a', href: '#'});
+    hamburgerLink.addEventListener('click', () => {
+        document.getElementById('sidenav').classList.toggle('sidenav--active');
+        if (document.getElementById('sidenav').classList
+        .contains('widenav--active')) {
+            
+        }
+    })
+    navBar.appendChild(hamburgerLink);
+
+    let hamburger = makeElement({type: 'i', id: 'hamburger', 
+    className: 'fal fa-bars'});
+    hamburgerLink.appendChild(hamburger);
+
     let navLogo = makeElement({type: 'i', id: 'navLogo', 
     className: 'far fa-check-square'});
     navBar.appendChild(navLogo);

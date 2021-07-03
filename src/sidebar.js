@@ -42,7 +42,8 @@ const makeProjectList = () => {
     let inputBar = makeElement({type: 'input', id: `inputBar`, 
     className: 'inputBar', href: '#'});
     inputBar.type = 'text';
-    inputBar.placeholder = 'Add Project'
+    inputBar.required = true;
+    inputBar.placeholder = 'Add Project';
 
     let approvedProject = makeElement({type: 'input', id: `approvedProject`, 
     className: 'approvedProject', href: '#'});
@@ -59,9 +60,17 @@ const makeProjectList = () => {
 }
 
 const addProject = () => {
+    let projectArray = [];
     document.getElementById('projectForm').addEventListener('submit', (event) => {
         event.preventDefault();
+        projectArray.push(document.getElementById('inputBar').value);
         document.getElementById('projectForm').reset();
+        for (let i = (projectArray.length - 1); i < projectArray.length; i++ ) {
+            let project = makeElement({type: 'button', id: `customProject${i}`, 
+            className: 'project', href: '#'});
+            project.innerHTML = `${projectArray[i]}`
+            document.getElementById('projectList').appendChild(project);
+        }
     });
 };
 
