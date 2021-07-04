@@ -21,6 +21,11 @@ submitTask();
         if (document.getElementById('inbox').style.display = 'none') {
             document.getElementById('today').style.display = 'none';
             document.getElementById('inbox').style.display = 'block';
+
+            let all = document.querySelectorAll(`h2[id^="customProject"]`)
+            all.forEach(element => {
+                element.style.display = 'none';
+            });
         };
     });
 })();
@@ -30,6 +35,13 @@ submitTask();
         if (document.getElementById('today').style.display = 'none') {
             document.getElementById('inbox').style.display = 'none';
             document.getElementById('today').style.display = 'block';
+
+            let all = document.querySelectorAll(`h2[id^="customProject"]`)
+            all.forEach(element => {
+                element.style.display = 'none';
+            });
         };
     });
 })();
+
+

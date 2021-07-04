@@ -1,4 +1,4 @@
-import {makeElement} from './make-items.js'
+import {makeElement, makeList} from './make-items.js'
 
 const grid = document.getElementById('grid');
 
@@ -31,7 +31,7 @@ const showAllProjects = () => {
         projectHolder.classList.toggle('project2--active');
 
                 if (projectHolder.classList.contains('project2--active')) {
-                    projectContent.style.maxHeight = 150 + 'px';
+                    projectContent.style.maxHeight = 100 + '%';
                 } else {
                     projectContent.style.maxHeight = 0;
                 };
@@ -63,14 +63,26 @@ const addProject = () => {
     let projectArray = [];
     document.getElementById('projectForm').addEventListener('submit', (event) => {
         event.preventDefault();
-        projectArray.push(document.getElementById('inputBar').value);
+        let textValue = document.getElementById('inputBar').value;
+        projectArray.push(textValue);
         document.getElementById('projectForm').reset();
         for (let i = (projectArray.length - 1); i < projectArray.length; i++ ) {
-            let project = makeElement({type: 'button', id: `customProject${i}`, 
+            let project = makeElement({type: 'button', id: `customButton${i}`, 
             className: 'project', href: '#'});
             project.innerHTML = `${projectArray[i]}`
             document.getElementById('projectList').appendChild(project);
-        }
+            makeList({id: `customProject${i}`, text: `${textValue}`});
+            let customProject = document.getElementById(`customProject${i}`);
+            customProject.style.display = 'none';
+            document.getElementById(`customButton${i}`).addEventListener('click', () => {
+                if (customProject.style.display = 'none') {
+                    document.querySelectorAll(`h2[class^="lists"]`).forEach(element => {
+                        element.style.display = 'none';
+                    });
+                    customProject.style.display = 'block';
+                };
+            });
+        };
     });
 };
 
