@@ -216,9 +216,13 @@ body {
     width: 40%;
     margin-top: 20px;
 }
-#inboxIcon {
+.fa-plus-circle {
     color: #00939b;
     font-weight: 600;
+    transition: font-weight 0.2s;
+}
+#inboxIcon:hover {
+    font-weight: normal;
 }
 
 .modalContainer {
@@ -279,7 +283,7 @@ body {
     background: #00ADB5;
     color: #393E46;
     margin-bottom: 20px;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 .modalHeader {
