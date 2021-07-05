@@ -118,7 +118,7 @@ const addTask = () => {
 };
 
 const toggleModal = () => {
-    const {modalContainer, cancel, closeIcon} = addTask();
+    const {modalContainer, closeIcon} = addTask();
     let navButton = document.getElementById('navTask');
 
     navButton.onclick = function() {
