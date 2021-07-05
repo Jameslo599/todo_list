@@ -47,14 +47,31 @@ let submitTask = () => {
         className: 'property'});
             let taskPriority = makeElement({ type: 'p', id: `taskPriority${i}`,
         className: 'property'});
+
+       // document.querySelectorAll(`h2[class^="lists"]`).forEach(element => {
+       //     if (element.style.display === 'block') {
+       //         document.querySelectorAll(`ul[class^="lists"]`).forEach(element => {
+       //             insertBefore(newTask, element.lastChild);
+//
+//
+       //         element.insertBefore(contentHolder, element.lastChild);
+       //         });
+       //     }
+       // });
         
-        if (document.getElementById('inbox').style.display === 'block') {
-            document.getElementById('inboxList').insertBefore(newTask, document.getElementById('inboxList').lastChild);
-            document.getElementById('inboxList').insertBefore(contentHolder, document.getElementById('inboxList').lastChild);
-        } else if (document.getElementById('today').style.display === 'block') {
-            document.getElementById('todayList').insertBefore(newTask, document.getElementById('todayList').lastChild);
-        document.getElementById('todayList').insertBefore(contentHolder, document.getElementById('todayList').lastChild);
-        }
+        //if (document.getElementById('inbox').style.display === 'block') {
+        //    document.getElementById('inboxList').lastChild.before(newTask);
+        //    document.getElementById('inboxList').lastChild.before(contentHolder);
+        //} else if (document.getElementById('today').style.display === 'block') {
+        //    document.getElementById('todayList').lastChild.before(newTask);
+        //    document.getElementById('todayList').lastChild.before(contentHolder);
+        //} 
+
+        document.querySelectorAll(`ul[class^="list"]`).forEach(element => {
+            if (element.style.display === 'block') {
+                element.lastChild.before(newTask);
+                element.lastChild.before(contentHolder);
+            }})
 
         document.getElementById(`createdHolder${i}`).appendChild(title);
         document.getElementById(`title${i}`).innerHTML = `Title: ${myTasks[i].title}`;

@@ -71,6 +71,7 @@ const addProject = () => {
             className: 'project', href: '#'});
             project.innerHTML = `${projectArray[i]}`
             document.getElementById('projectList').appendChild(project);
+
             makeList({id: `customProject${i}`, text: `${textValue}`});
             let customProject = document.getElementById(`customProject${i}`);
             customProject.style.display = 'none';
@@ -80,6 +81,11 @@ const addProject = () => {
                         element.style.display = 'none';
                     });
                     customProject.style.display = 'block';
+
+                    document.querySelectorAll(`ul[class^="list"]`).forEach(element => {
+                        element.style.display = 'none';
+                    });
+                    document.getElementById(`customProject${i}List`).style.display = 'block';
                 };
             });
         };

@@ -22,10 +22,17 @@ submitTask();
             document.getElementById('today').style.display = 'none';
             document.getElementById('inbox').style.display = 'block';
 
-            let all = document.querySelectorAll(`h2[id^="customProject"]`)
-            all.forEach(element => {
+            let allCustom = document.querySelectorAll(`h2[id^="customProject"]`)
+            allCustom.forEach(element => {
                 element.style.display = 'none';
             });
+
+            let allCustomLists = document.querySelectorAll(`ul[class^="list"]`)
+            allCustomLists.forEach(element => {
+                element.style.display = 'none';
+            });
+
+            document.getElementById('inboxList').style.display = 'block';
         };
     });
 })();
@@ -36,10 +43,17 @@ submitTask();
             document.getElementById('inbox').style.display = 'none';
             document.getElementById('today').style.display = 'block';
 
-            let all = document.querySelectorAll(`h2[id^="customProject"]`)
-            all.forEach(element => {
+            let allCustom = document.querySelectorAll(`h2[id^="customProject"]`)
+            allCustom.forEach(element => {
                 element.style.display = 'none';
             });
+
+            let allCustomLists = document.querySelectorAll(`ul[class^="list"]`)
+            allCustomLists.forEach(element => {
+                element.style.display = 'none';
+            });
+
+            document.getElementById('todayList').style.display = 'block';
         };
     });
 })();

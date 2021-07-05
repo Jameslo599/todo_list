@@ -125,17 +125,15 @@ const toggleModal = () => {
         modalContainer.style.display = "block";
     };
 
-    cancel.onclick = function() {
-        modalContainer.style.display = "none";
-    };
-
     closeIcon.onclick = function() {
         modalContainer.style.display = "none";
+        document.getElementById('newTask').reset();
     };
 
     window.onclick = function(event) {
         if (event.target == modalContainer) {
             modalContainer.style.display = "none";
+            document.getElementById('newTask').reset();
         };
     };
 };
