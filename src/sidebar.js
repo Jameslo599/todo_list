@@ -13,8 +13,20 @@ const makeSidebar = () => {
     sidebar.appendChild(sideItem);
     };
     document.getElementById('project0').innerHTML = 'Inbox';
+        let inboxIcon = makeElement({type: 'i', id: 'homeIcon', 
+        className: 'fad fa-inbox'});
+        document.getElementById('project0').prepend(inboxIcon);
+
     document.getElementById('project1').innerHTML = 'Today';
+        let todayIcon = makeElement({type: 'i', id: 'calendarIcon', 
+        className: 'fas fa-calendar-day'});
+        document.getElementById('project1').prepend(todayIcon);
+
     document.getElementById('project2').innerHTML = 'Projects';
+        let diagramIcon = makeElement({type: 'i', id: 'listIcon', 
+        className: 'fas fa-list'});
+        document.getElementById('project2').prepend(diagramIcon);
+
     let projectList = makeElement({type: 'div', id: `projectList`, 
     className: 'project', href: '#'});
     let inputForm = makeElement({type: 'form', id: `projectForm`,});
@@ -45,17 +57,17 @@ const makeProjectList = () => {
     inputBar.required = true;
     inputBar.placeholder = 'Add Project';
 
-    let approvedProject = makeElement({type: 'input', id: `approvedProject`, 
-    className: 'approvedProject', href: '#'});
+    let approvedProject = makeElement({type: 'button', id: `approvedProject`, 
+    className: 'fas fa-check-square', href: '#'});  
     approvedProject.type = 'submit';
 
-    let rejectedProject = makeElement({ type: 'input', id: 'rejectedProject', 
-    className: 'rejectedProject'});
+    let rejectedProject = makeElement({ type: 'button', id: 'rejectedProject', 
+    className: 'fas fa-window-close'});
     rejectedProject.type = 'reset'
 
     document.getElementById('projectForm').appendChild(inputBar);
-    document.getElementById('projectForm').appendChild(approvedProject);
     document.getElementById('projectForm').appendChild(rejectedProject );
+    document.getElementById('projectForm').appendChild(approvedProject);
 
 }
 
@@ -70,6 +82,10 @@ const addProject = () => {
             let project = makeElement({type: 'button', id: `customButton${i}`, 
             className: 'project', href: '#'});
             project.innerHTML = `${projectArray[i]}`
+
+            let icon = makeElement({type: 'i', id: 'icon', 
+            className: 'fas fa-circle'});
+            project.prepend(icon);
             document.getElementById('projectList').appendChild(project);
 
             makeList({id: `customProject${i}`, text: `${textValue}`});
