@@ -305,6 +305,20 @@ body {
     color: #b73831;
 }
 
+#trashIcon {
+    float: right;
+    padding: 0 20px;
+    font-size: 30px;
+    color: #FF4136;
+}
+
+#editIcon {
+    float: right;
+    padding: 0 20px;
+    font-size: 30px;
+    color: #FF4136;
+}
+
 .modalBody {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -315,16 +329,28 @@ body {
 #descriptionInput {
     width: 200px;
 }
+#descriptionInputClone {
+    width: 200px;
+}
 
 #priorityInput {
+    width: 260px;
+}
+#priorityInputClone {
     width: 260px;
 }
 
 #project {
     margin-top: 10px;
 }
+#projectClone {
+    margin-top: 10px;
+}
 
 #projectInput {
+    width: 260px;
+}
+#projectInputClone {
     width: 260px;
 }
 
@@ -345,6 +371,10 @@ body {
     text-align: center;
     padding-bottom: 20px;
 }
+#buttonHolderClone {
+    text-align: center;
+    padding-bottom: 20px;
+}
 
 .button {
     padding: 11px 12px;
@@ -357,6 +387,9 @@ body {
 #titleInput {
     padding-top: 7px;
 }
+#titleInputClone {
+    padding-top: 7px;
+}
 
 #submission {
     background-color: #00ADB5;
@@ -366,12 +399,27 @@ body {
 #submission:hover {
     background-color: #00939b;
 }
+#submissionClone {
+    background-color: #00ADB5;
+    color: white;
+    transition: background 0.4s;
+}
+#submissionClone:hover {
+    background-color: #00939b;
+}
 
 
 #cancel{
     transition: background 0.4s, color 0.4s;
 }
 #cancel:hover {
+    color: #FFFFFF;
+    background-color: #393E46;
+}
+#cancelClone {
+    transition: background 0.4s, color 0.4s;
+}
+#cancelClone:hover {
     color: #FFFFFF;
     background-color: #393E46;
 }
