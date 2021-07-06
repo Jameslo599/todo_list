@@ -1,4 +1,5 @@
 import {makeElement, makeTask} from './make-items.js'
+import { editTask } from './modal.js';
 import { format } from 'date-fns'
 
 let myTasks = [];
@@ -49,64 +50,41 @@ function editInfo(newTask, i, localTime) {
         event.preventDefault();
         modalContainer.style.display = 'block';
         document.getElementById('newTask').style.display = 'none';
-        document.getElementById(`newTaskClone`).style.display = 'block';
+        document.getElementById(`newTaskClone${i}`).style.display = 'block';
 
-        document.getElementById('submissionClone').value = 'Update Task';
-        document.getElementById("titleInputClone").value = myTasks[i].title;
-        document.getElementById("descriptionInputClone").value = myTasks[i].description;
-        document.getElementById("dateInputClone").value = localTime;
-        document.getElementById("priorityInputClone").value = myTasks[i].priority;
+        document.getElementById(`submissionClone${i}`).value = 'Update Task';
+        document.getElementById(`titleInputClone${i}`).value = myTasks[i].title;
+        document.getElementById(`descriptionInputClone${i}`).value = myTasks[i].description;
+        document.getElementById(`dateInputClone${i}`).value = localTime;
+        document.getElementById(`priorityInputClone${i}`).value = myTasks[i].priority;
         event.stopPropagation();
-    });
+    })
 };
+
 
 function submitEdit(i) {
-   // function changeInfo(event) {
-   //     event.preventDefault();
-   //     let submissionEdit = makeTask({
-   //         title: `${document.getElementById("titleInputClone").value}`,
-   //         description: `${document.getElementById("descriptionInputClone").value}`,
-   //         priority: `${document.getElementById("priorityInputClone").value}`,
-   //     });
-   //     myTasks.splice(i, 1, submissionEdit);
-   //     console.log(myTasks);
-   //     console.log(i)
-   //     document.getElementById(`createdTask${i}`).childNodes[0].nodeValue = `${myTasks[i].title}`;
-   //     document.getElementById(`title${i}`).innerHTML = `Title: ${myTasks[i].title}`;
-   //     document.getElementById(`description${i}`).innerHTML = `Description: ${myTasks[i].description}`;
-   //     document.getElementById(`taskDate${i}`).innerHTML = `Date: ${format(new Date(document.getElementById("dateInputClone").value), 'PPpp')}`;
-   //     document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${myTasks[i].priority}`;
-   //     modalContainer.style.display = 'none';
-   //     document.getElementById('submission').value = 'Add Task';
-//
-   //     document.getElementById('newTask').style.display = 'block';
-   //     document.getElementById('newTaskClone').style.display = 'none';
-   // };
-    i;
-    //document.getElementById('newTaskClone').removeEventListener('submit', changeInfo(i));
-    document.getElementById('newTaskClone').addEventListener('submit', changeInfo(i));
-};
-
-function changeInfo(event) {
-    event.preventDefault();
-    let submissionEdit = makeTask({
-        title: `${document.getElementById("titleInputClone").value}`,
-        description: `${document.getElementById("descriptionInputClone").value}`,
-        priority: `${document.getElementById("priorityInputClone").value}`,
+    editTask(i);
+    document.getElementById(`newTaskClone${i}`).addEventListener('submit', function changeInfo(event) {
+        event.preventDefault();
+        let submissionEdit = makeTask({
+            title: `${document.getElementById(`titleInputClone${i}`).value}`,
+            description: `${document.getElementById(`descriptionInputClone${i}`).value}`,
+            priority: `${document.getElementById(`priorityInputClone${i}`).value}`,
+        });
+        myTasks.splice(i, 1, submissionEdit);
+        console.log(myTasks);
+        console.log(i)
+        document.getElementById(`createdTask${i}`).childNodes[0].nodeValue = `${myTasks[i].title}`;
+        document.getElementById(`title${i}`).innerHTML = `Title: ${myTasks[i].title}`;
+        document.getElementById(`description${i}`).innerHTML = `Description: ${myTasks[i].description}`;
+        document.getElementById(`taskDate${i}`).innerHTML = `Date: ${format(new Date(document.getElementById(`dateInputClone${i}`).value), 'PPpp')}`;
+        document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${myTasks[i].priority}`;
+        modalContainer.style.display = 'none';
+        document.getElementById('submission').value = 'Add Task';
+    
+        document.getElementById('newTask').style.display = 'block';
+        document.getElementById(`newTaskClone${i}`).style.display = 'none';
     });
-    myTasks.splice(i, 1, submissionEdit);
-    console.log(myTasks);
-    console.log(i)
-    document.getElementById(`createdTask${i}`).childNodes[0].nodeValue = `${myTasks[i].title}`;
-    document.getElementById(`title${i}`).innerHTML = `Title: ${myTasks[i].title}`;
-    document.getElementById(`description${i}`).innerHTML = `Description: ${myTasks[i].description}`;
-    document.getElementById(`taskDate${i}`).innerHTML = `Date: ${format(new Date(document.getElementById("dateInputClone").value), 'PPpp')}`;
-    document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${myTasks[i].priority}`;
-    modalContainer.style.display = 'none';
-    document.getElementById('submission').value = 'Add Task';
-
-    document.getElementById('newTask').style.display = 'block';
-    document.getElementById('newTaskClone').style.display = 'none';
 };
 
 function makeTaskButton() {
@@ -123,7 +101,7 @@ function makeTaskButton() {
         collapseTask(newTask);
         makeTrash(newTask);
         editInfo(newTask, i, localTime);
-        //submitEdit();        
+        submitEdit(i);        
 
         let title = makeElement({ type: 'p', id: `title${i}`,
         className: 'property'});

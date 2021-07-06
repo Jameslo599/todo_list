@@ -114,16 +114,11 @@ const addTask = () => {
     submission.value = 'Add Task';
     buttonHolderRight.appendChild(submission);
 
-    let formClone = document.getElementById('newTask').cloneNode(true);
-        formClone.id = 'formClone';
-        formClone.style.display = 'none';
-        modalContainer.appendChild(formClone);
-
     return {modalContainer, cancel, closeIcon, submission};
 };
 
-const editTask = () => {
-    let newTaskClone = makeElement({ type: 'form', id: 'newTaskClone', 
+const editTask = (i) => {
+    let newTaskClone = makeElement({ type: 'form', id: `newTaskClone${i}`, 
     className: 'newTask'});
     newTaskClone.style.display = 'none';
     modalContainer.appendChild(newTaskClone);
@@ -149,7 +144,7 @@ const editTask = () => {
     titleClone.innerHTML = `Title:<br>`
     bodyClone.appendChild(titleClone);
 
-    let titleInputClone = makeElement({ type: 'input', id: 'titleInputClone', 
+    let titleInputClone = makeElement({ type: 'input', id: `titleInputClone${i}`, 
     className: 'input'});
     titleInputClone.type = 'text'
     titleInputClone.required = true;
@@ -160,7 +155,7 @@ const editTask = () => {
     dateClone.innerHTML = `Due Date:<br>`
     bodyClone.appendChild(dateClone);
 
-    let dateInputClone = makeElement({ type: 'input', id: 'dateInputClone', 
+    let dateInputClone = makeElement({ type: 'input', id: `dateInputClone${i}`, 
     className: 'input'});
     dateInputClone.type = 'datetime-local'
     dateInputClone.min = `${format(new Date(), 'yyyy-MM-dd\'T\'HH:mm')}`;
@@ -172,7 +167,7 @@ const editTask = () => {
     descriptionClone.innerHTML = `Description:<br>`
     bodyClone.appendChild(descriptionClone);
 
-    let descriptionInputClone = makeElement({ type: 'textarea', id: 'descriptionInputClone', 
+    let descriptionInputClone = makeElement({ type: 'textarea', id: `descriptionInputClone${i}`, 
     className: 'input'});
     descriptionInputClone.rows = '6';
     descriptionInputClone.cols = '21';
@@ -184,18 +179,19 @@ const editTask = () => {
     priorityClone.innerHTML = `Priority:<br>`
     bodyClone.appendChild(priorityClone);
 
-    let priorityInputClone = makeElement({ type: 'select', id: 'priorityInputClone', 
+    let priorityInputClone = makeElement({ type: 'select', id: `priorityInputClone${i}`, 
     className: 'input'});
     priorityClone.appendChild(priorityInputClone);
 
     for (let i = 0; i <= 3; i++) {
-        let choosePriority = makeElement({ type: 'option', id: `priorityClone${i}`});
+        let choosePriority = makeElement({ type: 'option', id: `priorityChoiceClone${i}`});
         priorityInputClone.appendChild(choosePriority);
     };
-    document.getElementById('priorityClone0').innerHTML = 'ASAP'
-    document.getElementById('priorityClone1').innerHTML = 'High'
-    document.getElementById('priorityClone2').innerHTML = 'Medium'
-    document.getElementById('priorityClone3').innerHTML = 'Low'
+    document.getElementById('priorityChoiceClone0').innerHTML = 'ASAP'
+    document.getElementById('priorityChoiceClone1').innerHTML = 'High'
+    document.getElementById('priorityChoiceClone2').innerHTML = 'Medium'
+    document.getElementById('priorityChoiceClone3').innerHTML = 'Low'
+    
 
     let projectClone = makeElement({ type: 'div', id: 'projectClone', 
     className: 'right-side'});
@@ -226,7 +222,7 @@ const editTask = () => {
     cancelClone.type = 'reset'
     buttonHolderRightClone.appendChild(cancelClone);
 
-    let submissionClone = makeElement({ type: 'input', id: 'submissionClone', 
+    let submissionClone = makeElement({ type: 'input', id: `submissionClone${i}`, 
     className: 'button'});
     submissionClone.type = 'submit'
     submissionClone.value = 'Add Task';
@@ -237,7 +233,7 @@ const editTask = () => {
 
 const toggleModal = () => {
     const {modalContainer, closeIcon} = addTask();
-    const {closeIconClone} = editTask();
+    //const {closeIconClone} = editTask();
     let navButton = document.getElementById('navTask');
 
     navButton.onclick = function() {
@@ -249,10 +245,10 @@ const toggleModal = () => {
         document.getElementById('newTask').reset();
     };
 
-    closeIconClone.onclick = function() {
-        modalContainer.style.display = 'none';
-        document.getElementById('newTaskClone').reset();
-    };
+    //closeIconClone.onclick = function() {
+    //    modalContainer.style.display = 'none';
+    //    document.getElementById('newTaskClone').reset();
+    //};
 
     window.onclick = function(event) {
         if (event.target == modalContainer) {
@@ -266,4 +262,4 @@ const toggleModal = () => {
 };
 
 
-export default toggleModal
+export {toggleModal, editTask}
