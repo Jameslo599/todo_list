@@ -27,7 +27,7 @@ const makeTask = ({
 
 const activateButton = (name) => {
     name.onclick = function() {
-        modalContainer.style.display = "block";
+        document.getElementById('modalContainer').style.display = "block";
     };
 };
 

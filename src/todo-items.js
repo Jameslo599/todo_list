@@ -13,106 +13,154 @@ let loadTasks = () => {
             priority: `${document.getElementById("priorityInput").value}`,
         });
         myTasks.push(submission);
-})};
+    });
+};
 
-let submitTask = () => {
+function collapseTask(newTask) {
+    newTask.addEventListener('click', () => {
+        const taskContent = newTask.nextElementSibling;
+        newTask.classList.toggle('createdTask--active')
+        if (newTask.classList.contains('createdTask--active')) {
+            taskContent.style.maxHeight = 150 + 'px';
+        } else {
+            taskContent.style.maxHeight = 0;
+        };
+    });
+}
+
+function makeTrash(newTask) {
+    let trash = makeElement({type: 'a', id: 'trashIcon', className: 'far fa-trash-alt'});
+    trash.addEventListener('click', (event) => {
+        event.preventDefault();
+        let sibling = document.getElementById(`${event.target.parentNode.id}`).nextElementSibling
+        sibling.remove();
+        document.getElementById(`${event.target.parentNode.id}`).remove();
+        event.stopPropagation();
+    });
+    newTask.appendChild(trash);
+};
+
+function editInfo(newTask, i, localTime) {
+    let edit = makeElement({type: 'i', id: 'editIcon', 
+    className: 'fas fa-edit'});
+    newTask.appendChild(edit);
+
+    edit.addEventListener('click', (event) => {
+        event.preventDefault();
+        modalContainer.style.display = 'block';
+        document.getElementById('newTask').style.display = 'none';
+        document.getElementById(`newTaskClone`).style.display = 'block';
+
+        document.getElementById('submissionClone').value = 'Update Task';
+        document.getElementById("titleInputClone").value = myTasks[i].title;
+        document.getElementById("descriptionInputClone").value = myTasks[i].description;
+        document.getElementById("dateInputClone").value = localTime;
+        document.getElementById("priorityInputClone").value = myTasks[i].priority;
+        event.stopPropagation();
+    });
+};
+
+function submitEdit(i) {
+   // function changeInfo(event) {
+   //     event.preventDefault();
+   //     let submissionEdit = makeTask({
+   //         title: `${document.getElementById("titleInputClone").value}`,
+   //         description: `${document.getElementById("descriptionInputClone").value}`,
+   //         priority: `${document.getElementById("priorityInputClone").value}`,
+   //     });
+   //     myTasks.splice(i, 1, submissionEdit);
+   //     console.log(myTasks);
+   //     console.log(i)
+   //     document.getElementById(`createdTask${i}`).childNodes[0].nodeValue = `${myTasks[i].title}`;
+   //     document.getElementById(`title${i}`).innerHTML = `Title: ${myTasks[i].title}`;
+   //     document.getElementById(`description${i}`).innerHTML = `Description: ${myTasks[i].description}`;
+   //     document.getElementById(`taskDate${i}`).innerHTML = `Date: ${format(new Date(document.getElementById("dateInputClone").value), 'PPpp')}`;
+   //     document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${myTasks[i].priority}`;
+   //     modalContainer.style.display = 'none';
+   //     document.getElementById('submission').value = 'Add Task';
+//
+   //     document.getElementById('newTask').style.display = 'block';
+   //     document.getElementById('newTaskClone').style.display = 'none';
+   // };
+    i;
+    //document.getElementById('newTaskClone').removeEventListener('submit', changeInfo(i));
+    document.getElementById('newTaskClone').addEventListener('submit', changeInfo(i));
+};
+
+function changeInfo(event) {
+    event.preventDefault();
+    let submissionEdit = makeTask({
+        title: `${document.getElementById("titleInputClone").value}`,
+        description: `${document.getElementById("descriptionInputClone").value}`,
+        priority: `${document.getElementById("priorityInputClone").value}`,
+    });
+    myTasks.splice(i, 1, submissionEdit);
+    console.log(myTasks);
+    console.log(i)
+    document.getElementById(`createdTask${i}`).childNodes[0].nodeValue = `${myTasks[i].title}`;
+    document.getElementById(`title${i}`).innerHTML = `Title: ${myTasks[i].title}`;
+    document.getElementById(`description${i}`).innerHTML = `Description: ${myTasks[i].description}`;
+    document.getElementById(`taskDate${i}`).innerHTML = `Date: ${format(new Date(document.getElementById("dateInputClone").value), 'PPpp')}`;
+    document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${myTasks[i].priority}`;
+    modalContainer.style.display = 'none';
+    document.getElementById('submission').value = 'Add Task';
+
+    document.getElementById('newTask').style.display = 'block';
+    document.getElementById('newTaskClone').style.display = 'none';
+};
+
+function makeTaskButton() {
     document.getElementById('newTask').addEventListener('submit', function logInfo(event) {
         event.preventDefault();
         let localTime = document.getElementById("dateInput").value;
 
         for (let i = (myTasks.length-1); i < myTasks.length; i++) {
-            let newTask = makeElement({type: 'button', id: `createdTask${i}`, 
+
+        let newTask = makeElement({type: 'button', id: `createdTask${i}`, 
         className: 'createdTask'});
-            newTask.innerHTML = `${myTasks[i].title}`;
-            newTask.type = 'button';
+        newTask.innerHTML = `${myTasks[i].title}`;
+        newTask.type = 'button';
+        collapseTask(newTask);
+        makeTrash(newTask);
+        editInfo(newTask, i, localTime);
+        //submitEdit();        
 
-            let trash = makeElement({type: 'a', id: 'closeIcon', 
-            className: 'far fa-trash-alt'});
-            trash.addEventListener('click', (event) => {
-                event.preventDefault();
-                document.getElementById(`createdHolder${i}`).remove();
-                document.getElementById(`createdTask${i}`).remove();
-                event.stopPropagation();
-            })
-            newTask.appendChild(trash);
-
-            let edit = makeElement({type: 'i', id: 'closeIcon', 
-            className: 'fas fa-edit'});
-            edit.addEventListener('click', (event) => {
-                event.preventDefault();
-                modalContainer.style.display = 'block';
-                document.getElementById('submission').value = 'Update Task';
-                document.getElementById("titleInput").value = `${myTasks[i].title}`;
-                document.getElementById("descriptionInput").value = `${myTasks[i].description}`;
-                document.getElementById("dateInput").value = localTime;
-                document.getElementById("priorityInput").value = `${myTasks[i].priority}`;
-                document.getElementById('newTask').removeEventListener('submit', logInfo);
-                
-                document.getElementById('newTask').addEventListener('submit', function editInfo() {
-                    let submissionEdit = makeTask({
-                        title: `${document.getElementById("titleInput").value}`,
-                        description: `${document.getElementById("descriptionInput").value}`,
-                        priority: `${document.getElementById("priorityInput").value}`,
-                    });
-                    myTasks.splice(i, 1, submissionEdit);
-                    newTask.innerHTML = `${myTasks[i].title}`
-                    document.getElementById(`title${i}`).innerHTML = `Title: ${myTasks[i].title}`;
-                    document.getElementById(`description${i}`).innerHTML = `Description: ${myTasks[i].description}`;
-                    document.getElementById(`taskDate${i}`).innerHTML = `Date: ${format(new Date(document.getElementById("dateInput").value), 'PPpp')}`;
-                    document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${myTasks[i].priority}`;
-                    newTask.appendChild(trash);
-                    newTask.appendChild(edit);
-                    modalContainer.style.display = 'none';
-                    document.getElementById('submission').value = 'Add Task';
-                    document.getElementById('submission').removeEventListener('click', editInfo);
-                    document.getElementById('newTask').addEventListener('submit', logInfo);
-                });
-                event.stopPropagation();
-            });
-            newTask.appendChild(edit);
-
-            newTask.addEventListener('click', () => {
-                const taskContent = newTask.nextElementSibling;
-                newTask.classList.toggle('createdTask--active');
-
-                if (newTask.classList.contains('createdTask--active')) {
-                    taskContent.style.maxHeight = 150 + 'px';
-                } else {
-                    taskContent.style.maxHeight = 0;
-                };
-            });
-
-            let contentHolder = makeElement({type: 'div', id: `createdHolder${i}`, 
-            className: 'createdHolder'})
-
-            let title = makeElement({ type: 'p', id: `title${i}`,
+        let title = makeElement({ type: 'p', id: `title${i}`,
         className: 'property'});
-            let description = makeElement({ type: 'p', id: `description${i}`,
+        title.innerHTML = `Title: ${myTasks[i].title}`;
+
+        let description = makeElement({ type: 'p', id: `description${i}`,
         className: 'property'});
-            let taskDate = makeElement({ type: 'p', id: `taskDate${i}`,
+        description.innerHTML = `Description: ${myTasks[i].description}`;
+
+        let taskDate = makeElement({ type: 'p', id: `taskDate${i}`,
         className: 'property'});
-            let taskPriority = makeElement({ type: 'p', id: `taskPriority${i}`,
+        taskDate.innerHTML = `Date: ${format(new Date(localTime), 'PPpp')}`;
+
+        let taskPriority = makeElement({ type: 'p', id: `taskPriority${i}`,
         className: 'property'});
+        taskPriority.innerHTML = `Priority: ${myTasks[i].priority}`;
+
+        let contentHolder = makeElement({type: 'div', id: `createdHolder${i}`, 
+        className: 'createdHolder'});
 
         document.querySelectorAll(`ul[class^="list"]`).forEach(element => {
             if (element.style.display === 'block') {
                 element.lastChild.before(newTask);
                 element.lastChild.before(contentHolder);
-            }});
+            };
+        });
 
-        document.getElementById(`createdHolder${i}`).appendChild(title);
-        document.getElementById(`title${i}`).innerHTML = `Title: ${myTasks[i].title}`;
-        document.getElementById(`createdHolder${i}`).appendChild(description);
-        document.getElementById(`description${i}`).innerHTML = `Description: ${myTasks[i].description}`;
-        document.getElementById(`createdHolder${i}`).appendChild(taskDate);
-        document.getElementById(`taskDate${i}`).innerHTML = `Date: ${format(new Date(localTime), 'PPpp')}`;
-        document.getElementById(`createdHolder${i}`).appendChild(taskPriority);
-        document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${myTasks[i].priority}`;
+        contentHolder.appendChild(title);
+        contentHolder.appendChild(description);
+        contentHolder.appendChild(taskDate);
+        contentHolder.appendChild(taskPriority);
         
+        modalContainer.style.display = 'none';
         document.getElementById('newTask').reset();
         };
-    })};
+    });
+};
+    
 
-
-
-export {makeTask, submitTask, loadTasks}
+export {makeTask, makeTaskButton, loadTasks}

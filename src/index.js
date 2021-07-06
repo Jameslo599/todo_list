@@ -1,6 +1,6 @@
-import {submitTask, loadTasks} from './todo-items.js'
+import {makeTaskButton, loadTasks} from './todo-items.js'
 import {makeNavbar} from './header.js'
-import {makeSidebar, grid, showAllProjects, makeProjectList, addProject} from './sidebar.js'
+import {makeSidebar, showAllProjects, makeProjectList, addProject} from './sidebar.js'
 import toggleModal from './modal.js'
 import { makeList } from './make-items.js'
 
@@ -15,7 +15,7 @@ makeProjectList();
 addProject();
 toggleModal();
 loadTasks();
-submitTask();
+makeTaskButton();
 
 (function goInbox () {
     document.getElementById('project0').addEventListener('click', () => {
