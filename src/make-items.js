@@ -12,12 +12,14 @@ const makeElement = ({
 };
 
 const makeTask = ({
+    id,
     title = 'Grind',
     description = 'Make my dreams come true',
     dueDate = 'No due date',
     priority = 'ASAP',
     project = 'Never give up!'
 } = {}) => ({
+    id,
     title,
     description,
     dueDate,
@@ -31,9 +33,7 @@ const activateButton = (name) => {
     };
 };
 
-const makeList = ({
-    id,
-    text,}) => {
+const makeList = ({id, text}) => {
     const subject = makeElement({type: 'h2', id: `${id}`, 
     className: `lists`});
     subject.innerHTML = `${text}`;

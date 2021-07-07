@@ -117,123 +117,8 @@ const addTask = () => {
     return {modalContainer, cancel, closeIcon, submission};
 };
 
-const editTask = (i) => {
-    let newTaskClone = makeElement({ type: 'form', id: `newTaskClone${i}`, 
-    className: 'newTask'});
-    newTaskClone.style.display = 'none';
-    modalContainer.appendChild(newTaskClone);
-
-    let headerClone = makeElement({ type: 'h2', id: 'modalHeaderClone', 
-    className: 'modalHeader'});
-    headerClone.innerHTML = 'New Task'
-    newTaskClone.appendChild(headerClone);
-
-    let closeLinkClone = makeElement({type: 'a', href: '#'});
-    headerClone.appendChild(closeLinkClone);
-
-    let closeIconClone = makeElement({type: 'i', id: 'closeIcon', 
-    className: 'fas fa-times'});
-    closeLinkClone.appendChild(closeIconClone);
-
-    let bodyClone = makeElement({ type: 'div', id: 'modalBodyClone', 
-    className: 'modalBody'});
-    newTaskClone.appendChild(bodyClone);
-
-    let titleClone = makeElement({ type: 'div', id: 'modalTitleClone', 
-    className: 'left-side'});
-    titleClone.innerHTML = `Title:<br>`
-    bodyClone.appendChild(titleClone);
-
-    let titleInputClone = makeElement({ type: 'input', id: `titleInputClone${i}`, 
-    className: 'input'});
-    titleInputClone.type = 'text'
-    titleInputClone.required = true;
-    titleClone.appendChild(titleInputClone);
-
-    let dateClone = makeElement({ type: 'div', id: 'dateClone', 
-    className: 'right-side'});
-    dateClone.innerHTML = `Due Date:<br>`
-    bodyClone.appendChild(dateClone);
-
-    let dateInputClone = makeElement({ type: 'input', id: `dateInputClone${i}`, 
-    className: 'input'});
-    dateInputClone.type = 'datetime-local'
-    dateInputClone.min = `${format(new Date(), 'yyyy-MM-dd\'T\'HH:mm')}`;
-    dateInputClone.required = true;
-    dateClone.appendChild(dateInputClone);
-
-    let descriptionClone = makeElement({ type: 'div', id: 'descriptionClone', 
-    className: 'left-side'});
-    descriptionClone.innerHTML = `Description:<br>`
-    bodyClone.appendChild(descriptionClone);
-
-    let descriptionInputClone = makeElement({ type: 'textarea', id: `descriptionInputClone${i}`, 
-    className: 'input'});
-    descriptionInputClone.rows = '6';
-    descriptionInputClone.cols = '21';
-    descriptionInputClone.required = true;
-    descriptionClone.appendChild(descriptionInputClone);
-
-    let priorityClone = makeElement({ type: 'div', id: 'priorityClone', 
-    className: 'right-side'});
-    priorityClone.innerHTML = `Priority:<br>`
-    bodyClone.appendChild(priorityClone);
-
-    let priorityInputClone = makeElement({ type: 'select', id: `priorityInputClone${i}`, 
-    className: 'input'});
-    priorityClone.appendChild(priorityInputClone);
-
-    for (let i = 0; i <= 3; i++) {
-        let choosePriority = makeElement({ type: 'option', id: `priorityChoiceClone${i}`});
-        priorityInputClone.appendChild(choosePriority);
-    };
-    document.getElementById('priorityChoiceClone0').innerHTML = 'ASAP'
-    document.getElementById('priorityChoiceClone1').innerHTML = 'High'
-    document.getElementById('priorityChoiceClone2').innerHTML = 'Medium'
-    document.getElementById('priorityChoiceClone3').innerHTML = 'Low'
-    
-
-    let projectClone = makeElement({ type: 'div', id: 'projectClone', 
-    className: 'right-side'});
-    projectClone.innerHTML = `Project:<br>`
-    priorityClone.appendChild(projectClone);
-
-    let projectInputClone = makeElement({ type: 'select', id: 'projectInputClone', 
-    className: 'input'});
-    projectClone.appendChild(projectInputClone);
-
-    for (let i = 0; i <= 1; i++) {
-        let chooseProject = makeElement({ type: 'option', id: `projectChoiceClone${i}`});
-        projectInputClone.appendChild(chooseProject);
-    };
-    document.getElementById('projectChoiceClone0').innerHTML = 'Inbox'
-    document.getElementById('projectChoiceClone1').innerHTML = 'Project'
-
-    let buttonHolderLeftClone = makeElement({ type: 'div', id: 'buttonHolderClone', 
-    className: 'left-side'});
-    bodyClone.appendChild(buttonHolderLeftClone);
-
-    let buttonHolderRightClone = makeElement({ type: 'div', id: 'buttonHolderClone', 
-    className: 'right-side'});
-    bodyClone.appendChild(buttonHolderRightClone);
-
-    let cancelClone = makeElement({ type: 'input', id: 'cancelClone', 
-    className: 'button'});
-    cancelClone.type = 'reset'
-    buttonHolderRightClone.appendChild(cancelClone);
-
-    let submissionClone = makeElement({ type: 'input', id: `submissionClone${i}`, 
-    className: 'button'});
-    submissionClone.type = 'submit'
-    submissionClone.value = 'Add Task';
-    buttonHolderRightClone.appendChild(submissionClone);
-
-    return {cancelClone, closeIconClone, submissionClone};
-};
-
 const toggleModal = () => {
     const {modalContainer, closeIcon} = addTask();
-    //const {closeIconClone} = editTask();
     let navButton = document.getElementById('navTask');
 
     navButton.onclick = function() {
@@ -245,21 +130,14 @@ const toggleModal = () => {
         document.getElementById('newTask').reset();
     };
 
-    //closeIconClone.onclick = function() {
-    //    modalContainer.style.display = 'none';
-    //    document.getElementById('newTaskClone').reset();
-    //};
-
     window.onclick = function(event) {
         if (event.target == modalContainer) {
             modalContainer.style.display = 'none';
             document.getElementById('newTask').style.display = 'block';
             document.getElementById('newTask').reset();
-            document.getElementById('newTaskClone').style.display = 'none';
-            document.getElementById('newTaskClone').reset();
         };
     };
 };
 
 
-export {toggleModal, editTask}
+export {toggleModal}
