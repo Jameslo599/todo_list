@@ -85,10 +85,11 @@ const createTaskButton = (i) => {
         appendToList, collapseTask, insertBeforeList, clearInputs};
 };
 
-let edit = () => {
+let edit = (i) => {
     let edit = makeElement({type: 'a', id: 'editIcon', className: 'fas fa-edit'});
 
     let appendEdit = (task) => task.appendChild(edit);
+
     let getId = () => edit.addEventListener('click', (event) => {
         event.preventDefault();
         let specificId = event.target.parentNode.id;
@@ -96,19 +97,29 @@ let edit = () => {
         let i = idNumber;
         modalContainer.style.display = 'block';
         document.getElementById(`submission`).value = 'Update Task';
-        document.getElementById(`titleInput`).value = myTasks[i].title;;
+        document.getElementById(`titleInput`).value = myTasks[i].title;
         document.getElementById(`descriptionInput`).value = myTasks[i].description;
         document.getElementById(`dateInput`).value = myTasks[i].dueDate;
         document.getElementById(`priorityInput`).value = myTasks[i].priority;
         event.stopPropagation();
-        
+        document.getElementById('newTask').addEventListener('submit', function commitEdit(event) {
+            event.preventDefault();
+            //document.getElementById('newTask').removeEventListener('submit', sendInfo(event));
+            document.getElementById(`title${i}`).innerHTML = `Title: ${document.getElementById("titleInput").value}`;
+            console.log(i);
     });
-    return {appendEdit, getId};
+});
+    let submitEdit = () => document.getElementById('newTask').addEventListener('submit', function commitEdit(event) {
+        event.preventDefault();
+        //document.getElementById('newTask').removeEventListener('submit', sendInfo(event));
+        document.getElementById(`title${i}`).innerHTML = myTasks[i].title;
+    });
+    return {appendEdit, getId, submitEdit,};
 };
 
 let trash = (i) => {
     const {newTask, appendToList, collapseTask, insertBeforeList, clearInputs} = createTaskButton(i);
-    const {appendEdit, getId} = edit();
+    const {appendEdit, getId, submitEdit} = edit();
     let trash = makeElement({type: 'a', id: 'trashIcon', className: 'far fa-trash-alt'});
     let appendTrash = () => newTask.appendChild(trash);
     let removeTask = (i) => trash.addEventListener('click', (event) => {
@@ -123,7 +134,7 @@ let trash = (i) => {
         event.stopPropagation();
     });
     return {appendTrash, removeTask, appendToList, collapseTask, insertBeforeList, clearInputs, newTask, 
-        appendEdit, getId};
+        appendEdit, getId, submitEdit};
 };
 
 
@@ -140,12 +151,16 @@ let showTodo = () => {
             todo.appendTrash();
             todo.appendEdit(todo.newTask)
             todo.getId();
+            //todo.submitEdit();
             todo.removeTask(i);
-            console.log(i);
+            //console.log(i);
             modalContainer.style.display = 'none';
             todo.clearInputs();
         };
+        document.getElementById('newTask').removeEventListener('submit', sendInfo);
     });
 };
+
+
 
 export {makeTask, createTaskButton, loadTasks, showTodo}

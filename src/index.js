@@ -17,6 +17,7 @@ toggleModal();
 loadTasks();
 showTodo();
 
+
 (function goInbox () {
     document.getElementById('project0').addEventListener('click', () => {
         if (document.getElementById('inbox').style.display = 'none') {
