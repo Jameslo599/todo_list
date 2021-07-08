@@ -88,11 +88,14 @@ const createTaskButton = (i) => {
 };
 
 let edit = () => {
-    let edit = makeElement({type: 'a', id: 'editIcon', className: 'fas fa-edit'});
+    let edit = makeElement({type: 'a', id: 'editIcon', className: 'fas fa-edit', href: '#'});
+    edit.onclick = () => {
+        modalContainer.style.display = 'block';
+    }
 
     let appendEdit = (task) => task.appendChild(edit);
 
-    let getId = () => edit.addEventListener('click', (event) => {
+    let getId = () => edit.addEventListener('click', function openEditor(event) {
         event.preventDefault();
         let specificId = event.target.parentNode.id;
         let idNumber = specificId[specificId.length -1];
@@ -136,10 +139,11 @@ let edit = () => {
             modalContainer.style.display = 'none';
             document.getElementById('newTask').reset();
             document.getElementById(`submission`).value = 'Add Task';
+            edit.addEventListener('click', openEditor, {once:true});
 
             console.log(myTasks);
         }, {once: true});
-    },);
+    }, {once: true});
     return {appendEdit, getId};
 };
 
