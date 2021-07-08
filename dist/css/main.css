@@ -42,17 +42,13 @@ body {
     padding-left: 20px;
 }
 
-#navTask {
-    float: right;
-    font-size: 30px;
-    font-weight: lighter;
-    margin: 3px 90px;
-    padding: 4px;
-    color: #00ADB5;
-    transition: background 0.2s;
+.fa-plus {
+    color: #00939b;
+    font-weight: 600;
+    transition: color 0.2s;
 }
-#navTask:hover{
-    background-color: #667081;
+.fa-plus:hover{
+    color: #00bac4;
 }
 
 #grid {
@@ -215,14 +211,6 @@ body {
     text-align: left;
     width: 40%;
     margin-top: 20px;
-}
-.fa-plus-circle {
-    color: #00939b;
-    font-weight: 600;
-    transition: font-weight 0.2s;
-}
-#inboxIcon:hover {
-    font-weight: normal;
 }
 
 .modalContainer {

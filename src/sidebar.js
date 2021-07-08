@@ -78,7 +78,12 @@ const addProject = () => {
         let textValue = document.getElementById('inputBar').value;
         projectArray.push(textValue);
         document.getElementById('projectForm').reset();
+
         for (let i = (projectArray.length - 1); i < projectArray.length; i++ ) {
+            let makeProject = makeElement({ type: 'option', id: `${textValue + i}`});
+            makeProject.innerHTML = `${textValue}`;
+            document.getElementById('projectInput').appendChild(makeProject);
+
             let project = makeElement({type: 'button', id: `customButton${i}`, 
             className: 'project', href: '#'});
             project.innerHTML = `${projectArray[i]}`

@@ -56,7 +56,7 @@ const makeList = ({id, text}) => {
     task.appendChild(taskLink);
 
     let taskIcon = makeElement({type: 'i', id: `${id}Icon`, 
-    className: 'fal fa-plus-circle'});
+    className: 'fas fa-plus'});
     taskLink.appendChild(taskIcon);
     activateButton(taskIcon);
 };

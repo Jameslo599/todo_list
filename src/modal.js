@@ -93,7 +93,7 @@ const addTask = () => {
         projectInput.appendChild(chooseProject);
     };
     document.getElementById('projectChoice0').innerHTML = 'Inbox'
-    document.getElementById('projectChoice1').innerHTML = 'Project'
+    document.getElementById('projectChoice1').innerHTML = 'Today'
 
     let buttonHolderLeft = makeElement({ type: 'div', id: 'buttonHolder', 
     className: 'left-side'});
@@ -130,10 +130,14 @@ const toggleModal = () => {
         document.getElementById('newTask').reset();
     };
 
+    let navTask = document.getElementById('navTask');
+    navTask.onclick = function() {
+        modalContainer.style.display = 'block';
+    };
+
     window.onclick = function(event) {
         if (event.target == modalContainer) {
             modalContainer.style.display = 'none';
-            document.getElementById('newTask').style.display = 'block';
             document.getElementById('newTask').reset();
         };
     };

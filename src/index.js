@@ -14,9 +14,14 @@ showAllProjects();
 makeProjectList();
 addProject();
 toggleModal();
-loadTasks();
-showTodo();
 
+(function submitTodo () {
+    let plusButton = document.querySelectorAll('.fa-plus')
+        plusButton.forEach(element => {
+        element.addEventListener('click', loadTasks, {once: true});
+        element.addEventListener('click', showTodo, {once: true});
+        });
+})();
 
 (function goInbox () {
     document.getElementById('project0').addEventListener('click', () => {

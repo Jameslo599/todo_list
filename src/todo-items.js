@@ -23,6 +23,7 @@ let loadTasks = () => {
         let info = storeInfo(myTasks);
         info.pushInfo();
         console.log(myTasks);
+        document.getElementById('newTask').removeEventListener('submit', sendInfo);
     });
 };
 
@@ -50,6 +51,7 @@ const createTaskButton = (i) => {
     let newTask = makeElement({type: 'button', id: `createdTask${i}`, 
     className: 'createdTask'});
     newTask.innerHTML = `${myTasks[i].title}`
+    
 
     let clearInputs = () => document.getElementById('newTask').reset();
 
@@ -85,7 +87,7 @@ const createTaskButton = (i) => {
         appendToList, collapseTask, insertBeforeList, clearInputs};
 };
 
-let edit = (i) => {
+let edit = () => {
     let edit = makeElement({type: 'a', id: 'editIcon', className: 'fas fa-edit'});
 
     let appendEdit = (task) => task.appendChild(edit);
@@ -102,24 +104,48 @@ let edit = (i) => {
         document.getElementById(`dateInput`).value = myTasks[i].dueDate;
         document.getElementById(`priorityInput`).value = myTasks[i].priority;
         event.stopPropagation();
+
         document.getElementById('newTask').addEventListener('submit', function commitEdit(event) {
             event.preventDefault();
-            //document.getElementById('newTask').removeEventListener('submit', sendInfo(event));
+
+            let newTask = document.getElementById(`createdTask${i}`);
+            newTask.childNodes[0].nodeValue = `${document.getElementById("titleInput").value}`;
+
             document.getElementById(`title${i}`).innerHTML = `Title: ${document.getElementById("titleInput").value}`;
-            console.log(i);
-    });
-});
-    let submitEdit = () => document.getElementById('newTask').addEventListener('submit', function commitEdit(event) {
-        event.preventDefault();
-        //document.getElementById('newTask').removeEventListener('submit', sendInfo(event));
-        document.getElementById(`title${i}`).innerHTML = myTasks[i].title;
-    });
-    return {appendEdit, getId, submitEdit,};
+            myTasks[i].title = document.getElementById("titleInput").value;
+
+            document.getElementById(`description${i}`).innerHTML = `Description: ${document.getElementById("descriptionInput").value}`;
+            myTasks[i].description = document.getElementById("descriptionInput").value;
+            console.log(myTasks[i].dueDate)
+            document.getElementById(`taskDate${i}`).innerHTML = `Date: ${format(new Date(myTasks[i].dueDate), 'PPpp')}`;
+            myTasks[i].dueDate = document.getElementById("dateInput").value;
+
+            document.getElementById(`taskPriority${i}`).innerHTML = `Priority: ${document.getElementById("priorityInput").value}`;
+            myTasks[i].priority = document.getElementById("priorityInput").value;
+
+            if (myTasks[i].priority === 'ASAP') {
+                newTask.style.background = '#150485';
+            } else if (myTasks[i].priority === 'High') {
+                newTask.style.background = '#590995';
+            } else if (myTasks[i].priority === 'Medium') {
+                newTask.style.background = '#C62A88';
+            } else if (myTasks[i].priority === 'Low') {
+                newTask.style.background = '#03C4A1';
+            };
+
+            modalContainer.style.display = 'none';
+            document.getElementById('newTask').reset();
+            document.getElementById(`submission`).value = 'Add Task';
+
+            console.log(myTasks);
+        }, {once: true});
+    },);
+    return {appendEdit, getId};
 };
 
 let trash = (i) => {
     const {newTask, appendToList, collapseTask, insertBeforeList, clearInputs} = createTaskButton(i);
-    const {appendEdit, getId, submitEdit} = edit();
+    const {appendEdit, getId} = edit();
     let trash = makeElement({type: 'a', id: 'trashIcon', className: 'far fa-trash-alt'});
     let appendTrash = () => newTask.appendChild(trash);
     let removeTask = (i) => trash.addEventListener('click', (event) => {
@@ -127,14 +153,13 @@ let trash = (i) => {
         let sibling = document.getElementById(`${event.target.parentNode.id}`).nextElementSibling
         sibling.remove();
         document.getElementById(`${event.target.parentNode.id}`).remove();
-        console.log(i + 'james');
         let index = myTasks.map(x => x.id).indexOf(i);
         myTasks.splice(index, 1);
         console.log(myTasks);
         event.stopPropagation();
     });
     return {appendTrash, removeTask, appendToList, collapseTask, insertBeforeList, clearInputs, newTask, 
-        appendEdit, getId, submitEdit};
+        appendEdit, getId};
 };
 
 
@@ -146,19 +171,32 @@ let showTodo = () => {
 
             let todo = trash(i);
             todo.insertBeforeList();
+            console.log(myTasks[i].priority.toString());
+            if (myTasks[i].priority === 'ASAP') {
+                todo.newTask.style.background = '#150485';
+            } else if (myTasks[i].priority === 'High') {
+                todo.newTask.style.background = '#590995';
+            } else if (myTasks[i].priority === 'Medium') {
+                todo.newTask.style.background = '#C62A88';
+            } else if (myTasks[i].priority === 'Low') {
+                todo.newTask.style.background = '#03C4A1';
+            };
+
             todo.collapseTask(todo.newTask);
             todo.appendToList();
             todo.appendTrash();
             todo.appendEdit(todo.newTask)
             todo.getId();
-            //todo.submitEdit();
             todo.removeTask(i);
-            //console.log(i);
             modalContainer.style.display = 'none';
             todo.clearInputs();
         };
-        document.getElementById('newTask').removeEventListener('submit', sendInfo);
+        let plusButton = document.querySelectorAll('.fa-plus')
+        plusButton.forEach(element => {
+        element.addEventListener('click', loadTasks, {once: true});
+        element.addEventListener('click', showTodo, {once: true});
     });
+    }, {once: true});
 };
 
 
