@@ -10,6 +10,7 @@ const storeInfo = (array) => {
         description: `${document.getElementById("descriptionInput").value}`,
         dueDate: `${document.getElementById("dateInput").value}`,
         priority: `${document.getElementById("priorityInput").value}`,
+        project: `${document.getElementById("projectInput").value}`,
     });
 
     let pushInfo = () => array.push(submission);
@@ -74,15 +75,24 @@ const createTaskButton = (i) => {
         });
     }
 
-    let insertBeforeList = () => {
-        document.querySelectorAll(`ul[class^="list"]`).forEach(element => {
-            if (element.style.display === 'block') {
-        
-                element.lastChild.before(newTask);
-                element.lastChild.before(contentHolder);
+    //let insertBeforeList = (i) => {
+    //    document.querySelectorAll(`ul[class^="list"]`).forEach(element => {
+    //        if (element.name = myTasks[i].project) {
+    //            console.log(element.name);
+    //            console.log(myTasks[i].project);
+    //            element.lastChild.before(newTask);
+    //            element.lastChild.before(contentHolder);
+    //        };
+    //    });
+    //}
+    let insertBeforeList = (i) => {
+        if (document.getElementsByTagName('ul').name = myTasks[i].project) {
+                console.log(myTasks[i].project);
+                let id = myTasks[i].project;
+                document.getElementById(`${id}List`).lastChild.before(newTask);
+                document.getElementById(`${id}List`).lastChild.before(contentHolder);
             };
-        });
-    }
+        };
     return {title, description, taskDate, taskPriority, contentHolder, newTask, 
         appendToList, collapseTask, insertBeforeList, clearInputs};
 };
@@ -174,7 +184,7 @@ let showTodo = () => {
         for (let i = (0 +(myTasks.length-1)); i < (myTasks.length); i++) {
 
             let todo = trash(i);
-            todo.insertBeforeList();
+            todo.insertBeforeList(i);
             console.log(myTasks[i].priority.toString());
             if (myTasks[i].priority === 'ASAP') {
                 todo.newTask.style.background = '#150485';

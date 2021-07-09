@@ -6,9 +6,11 @@ import { makeList } from './make-items.js'
 
 makeNavbar();
 makeList({id: 'inbox', text: 'Inbox'});
+document.getElementById('inboxList').setAttribute('name', 'Inbox')
 document.getElementById('inbox').style.display = 'block';
 document.getElementById('inboxList').style.display = 'block';
 makeList({id: 'today', text: 'Today'});
+document.getElementById('todayList').setAttribute('name', 'Today')
 makeSidebar();
 showAllProjects();
 makeProjectList();

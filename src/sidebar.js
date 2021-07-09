@@ -29,6 +29,7 @@ const makeSidebar = () => {
 
     let projectList = makeElement({type: 'div', id: `projectList`, 
     className: 'project', href: '#'});
+    
     let inputForm = makeElement({type: 'form', id: `projectForm`,});
     sidebar.appendChild(projectList);
     projectList.appendChild(inputForm);
@@ -107,6 +108,7 @@ const addProject = () => {
                         element.style.display = 'none';
                     });
                     document.getElementById(`customProject${i}List`).style.display = 'block';
+                    document.getElementById(`customProject${i}List`).setAttribute('name', `${textValue + i}`) 
                 };
             });
         };

@@ -79,7 +79,7 @@ const addTask = () => {
     document.getElementById('priority2').innerHTML = 'Medium'
     document.getElementById('priority3').innerHTML = 'Low'
 
-    let project = makeElement({ type: 'div', id: 'project', 
+    let project = makeElement({ type: 'div', id: `project`, name: ``,
     className: 'right-side'});
     project.innerHTML = `Project:<br>`
     priority.appendChild(project);
@@ -119,20 +119,10 @@ const addTask = () => {
 
 const toggleModal = () => {
     const {modalContainer, closeIcon} = addTask();
-    let navButton = document.getElementById('navTask');
-
-    navButton.onclick = function() {
-        modalContainer.style.display = 'none';
-    };
 
     closeIcon.onclick = function() {
         modalContainer.style.display = 'none';
         document.getElementById('newTask').reset();
-    };
-
-    let navTask = document.getElementById('navTask');
-    navTask.onclick = function() {
-        modalContainer.style.display = 'block';
     };
 
     window.onclick = function(event) {

@@ -32,10 +32,6 @@ let makeNavbar = () => {
 
     let taskLink = makeElement({type: 'a', href: '#'});
     navBar.appendChild(taskLink);
-
-    let addTask = makeElement({type: 'i', id: 'navTask', 
-    className: 'fas fa-plus'});
-    taskLink.appendChild(addTask);
 };
 
 export {makeNavbar};
