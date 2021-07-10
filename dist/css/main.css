@@ -1,412 +1,419 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Open Sans', sans-serif;
-    background-color: #EEEEEE
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  background-color: #eeeeee;
 }
 
 .navbar {
-    background-color: #222831;
-    width: 100%;
-    position: fixed;
-    color: #FFFFFF;
-    z-index: 1;
-    top: 0;
-    list-style: none;
-    text-align: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin: 0;
+  background-color: #222831;
+  width: 100%;
+  position: fixed;
+  color: #ffffff;
+  z-index: 1;
+  top: 0;
+  list-style: none;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0;
 }
 
 .navbar > li {
-    display: inline-block;
-    padding: 3px 180px 0 10px;
-    font-size: 30px;
-    font-weight: bolder;
+  display: inline-block;
+  padding: 3px 180px 0 10px;
+  font-size: 30px;
+  font-weight: bolder;
 }
 
 #hamburger {
-    font-size: 30px;
-    float: left;
-    margin: 2px 55px 0 10px;
-    padding: 4px;
-    color: #FFFFFF;
-    transition: background 0.2s;
+  font-size: 30px;
+  float: left;
+  margin: 2px 55px 0 10px;
+  padding: 4px;
+  color: #ffffff;
+  transition: background 0.2s;
 }
 #hamburger:hover {
-    background-color: #667081
+  background-color: #667081;
 }
 #navLogo {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .fa-plus {
-    color: #00939b;
-    font-weight: 600;
-    transition: color 0.2s;
+  color: #00939b;
+  font-weight: 600;
+  transition: color 0.2s;
 }
-.fa-plus:hover{
-    color: #00bac4;
+.fa-plus:hover {
+  color: #00bac4;
 }
 
 #grid {
-    display: grid;
+  display: grid;
 }
 
 .lists {
-    text-align: center;
-    font-size: 40px;
-    margin: 0;
-    padding-top: 150px;
+  text-align: center;
+  font-size: 40px;
+  margin: 0;
+  padding-top: 150px;
 }
 
 #inbox {
-    display: block;
+  display: block;
 }
 
 #today {
-    display: none;
+  display: none;
 }
 
 .list {
-    text-align: -webkit-center;
-    font-size: 30px;
-    padding: 0;
+  text-align: -webkit-center;
+  font-size: 30px;
+  padding: 0;
 }
 
 .sidenav {
-    height: 100%; 
-    max-width: 300px; 
-    transition: max-width 0.2s;
-    position: fixed; 
-    left: 0;
-    background-color: #00ADB5; 
-    overflow-x: hidden; 
-    padding-top: 90px;
-    padding-left: 40px;
-    line-height: 40px;
-    margin-top: 2em;
+  height: 100%;
+  max-width: 300px;
+  transition: max-width 0.2s;
+  position: fixed;
+  left: 0;
+  background-color: #00adb5;
+  overflow-x: hidden;
+  padding-top: 90px;
+  padding-left: 40px;
+  line-height: 40px;
+  margin-top: 2em;
 }
 
 .sidenav--active {
-    max-width: 0;
-    padding-left: 0;
+  max-width: 0;
+  padding-left: 0;
 }
 
 .sidenav button {
-    width: 90%;
-    padding: 5px 0 5px 10px;
-    text-decoration: none;
-    margin-bottom: 20px;
-    font-size: 25px;
-    color: #000000;
-    display: flex;
-    border: none;
-    border-radius: 1em;
-    overflow: hidden;
-    transition: background 0.2s;
+  width: 90%;
+  padding: 5px 0 5px 10px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  font-size: 25px;
+  color: #000000;
+  display: flex;
+  border: none;
+  border-radius: 1em;
+  overflow: hidden;
+  transition: background 0.2s;
 }
 
 .sidenav button:hover {
-    background-color: #EEEEEE;
+  background-color: #eeeeee;
 }
 
 .project2 {
-    outline: none;
-    background-color: inherit;
-    text-align: left;
-    transition: background 0.2s;
-    padding: 10px 0 5px 10px !important;
+  outline: none;
+  background-color: inherit;
+  text-align: left;
+  transition: background 0.2s;
+  padding: 10px 0 5px 10px !important;
 }
 
 .project2::after {
-    content: '\25be';
-    margin-left: 20px;
-    padding: 0 20px 10px 0;
-    transform: scale(1);
+  content: "\25be";
+  margin-left: 20px;
+  padding: 0 20px 10px 0;
+  transform: scale(1);
 }
 
-.project2--active { background: #EEEEEE;}
-.project2--active::after { content: '\25b8';}
+.project2--active {
+  background: #eeeeee;
+}
+.project2--active::after {
+  content: "\25b8";
+}
 
 #projectList {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s;
 }
 
 #homeIcon {
-    color: #222831;
-    margin-right: 10px;
-    margin-top: 1px;
+  color: #222831;
+  margin-right: 10px;
+  margin-top: 1px;
 }
 #calendarIcon {
-    color: #222831;
-    margin-right: 15px;
+  color: #222831;
+  margin-right: 15px;
 }
 #listIcon {
-    color: #222831;
-    margin-right: 10px;
-    margin-top: 2px;
+  color: #222831;
+  margin-right: 10px;
+  margin-top: 2px;
 }
 
 .project {
-    background-color: inherit;
+  background-color: inherit;
 }
 
 .inputBar {
-    width: 65%;
-    padding: 5px 0 5px 10px;
-    border-radius: 0.5em;
-    outline: none;
-    border-width: thin;
-    grid-area: a;
+  width: 65%;
+  padding: 5px 0 5px 10px;
+  border-radius: 0.5em;
+  outline: none;
+  border-width: thin;
+  grid-area: a;
 }
 
 #rejectedProject {
-    color: #BB2205;
-    font-size: 40px;
-    grid-area: b;
-    margin: 10px 0 0 20px;
-    background-color: inherit;
-    outline: none;
-    cursor: pointer;
-    width: 33%;
+  color: #bb2205;
+  font-size: 40px;
+  grid-area: b;
+  margin: 10px 0 0 20px;
+  background-color: inherit;
+  outline: none;
+  cursor: pointer;
+  width: 33%;
 }
 #rejectedProject:hover {
-    color: #db2c2c;
+  color: #db2c2c;
 }
 
 #approvedProject {
-    color: #A5E1AD;
-    font-size: 40px;
-    grid-area: c;
-    margin: 10px 70px 0 0;
-    background-color: inherit;
-    outline: none;
-    cursor: pointer;
-    width: 29%;
+  color: #a5e1ad;
+  font-size: 40px;
+  grid-area: c;
+  margin: 10px 70px 0 0;
+  background-color: inherit;
+  outline: none;
+  cursor: pointer;
+  width: 29%;
 }
 #approvedProject:hover {
-    color: #4ddd61;
+  color: #4ddd61;
 }
 
 #projectForm {
-    display: grid;
-    grid-template-areas:
-        'a a'
-        'b c';
-    width: 400px;
+  display: grid;
+  grid-template-areas:
+    "a a"
+    "b c";
+  width: 400px;
 }
 
 #icon {
-    margin: 2px 20px;
+  margin: 2px 20px;
 }
 
 .task {
-    list-style: none;
-    font-size: 25px;
-    text-align: left;
-    width: 40%;
-    margin-top: 20px;
+  list-style: none;
+  font-size: 25px;
+  text-align: left;
+  width: 40%;
+  margin-top: 20px;
 }
 
 .modalContainer {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-    animation: popup 0.4s;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  animation: popup 0.4s;
 }
 
 .newTask {
-    background: #FFFFFF;
-    border: 1px solid #111111;
-    width: fit-content;
-    margin-top: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 1em;
+  background: #ffffff;
+  border: 1px solid #111111;
+  width: fit-content;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 1em;
 }
 
 .createdTask {
-    display: block;
-    font-size: 20px;
-    width: 40%;
-    padding: 15px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    background: #00ADB5;
-    color: #EEEEEE;
-    text-align: left;
-    transition: background 0.2s;
+  display: block;
+  font-size: 20px;
+  width: 40%;
+  padding: 15px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #00adb5;
+  color: #eeeeee;
+  text-align: left;
+  transition: background 0.2s;
 }
 
 .createdTask::after {
-    content: '\25be';
-    float: right;
-    transform: scale(1.5);
+  content: "\25be";
+  float: right;
+  transform: scale(1.5);
 }
 
-.createdTask--active { background: #555555;}
-.createdTask--active::after { content: '\25b4';}
+.createdTask--active {
+  background: #555555;
+}
+.createdTask--active::after {
+  content: "\25b4";
+}
 
 .createdHolder {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 40%;
-    font-size: 20px;
-    font-weight: 600;
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.2s;
-    background: #00ADB5;
-    color: #393E46;
-    margin-bottom: 20px;
-    overflow-x: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 40%;
+  font-size: 20px;
+  font-weight: 600;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.2s;
+  background: #00adb5;
+  color: #393e46;
+  margin-bottom: 20px;
+  overflow-x: auto;
 }
 
 .modalHeader {
-    padding: 20px 0 20px 20px;
-    border-bottom-style: solid;
-    border-width: 1px;
-    border-color: grey;
-    margin: 0 20px;
-    box-sizing: border-box;
+  padding: 20px 0 20px 20px;
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: grey;
+  margin: 0 20px;
+  box-sizing: border-box;
 }
 
 #closeIcon {
-    float: right;
-    padding: 0 20px;
-    font-size: 30px;
-    color: #FF4136;
+  float: right;
+  padding: 0 20px;
+  font-size: 30px;
+  color: #ff4136;
 }
 #closeIcon:hover {
-    color: #b73831;
+  color: #b73831;
 }
 
 #trashIcon {
-    float: right;
-    padding: 0 20px;
-    font-size: 30px;
-    color: #FF4136;
+  float: right;
+  padding: 0 20px;
+  font-size: 30px;
+  color: #ff4136;
 }
 
 #editIcon {
-    float: right;
-    padding: 0 20px;
-    font-size: 30px;
-    color: #FF4136;
+  float: right;
+  padding: 0 20px;
+  font-size: 30px;
+  color: #ff4136;
 }
 
 .modalBody {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: auto;
-    padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: auto;
+  padding: 0 20px;
 }
 
 #descriptionInput {
-    width: 200px;
+  width: 200px;
 }
 #descriptionInputClone {
-    width: 200px;
+  width: 200px;
 }
 
 #priorityInput {
-    width: 260px;
+  width: 260px;
 }
 #priorityInputClone {
-    width: 260px;
+  width: 260px;
 }
 
 #project {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 #projectClone {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 #projectInput {
-    width: 260px;
+  width: 260px;
 }
 #projectInputClone {
-    width: 260px;
+  width: 260px;
 }
 
 .input {
-    margin-top: 10px;
-    padding: 4px;
+  margin-top: 10px;
+  padding: 4px;
 }
 
 .left-side {
-    padding: 20px 0 0 20px;
+  padding: 20px 0 0 20px;
 }
 
 .right-side {
-    padding: 20px 20px 0 0;
+  padding: 20px 20px 0 0;
 }
 
 #buttonHolder {
-    text-align: center;
-    padding-bottom: 20px;
+  text-align: center;
+  padding-bottom: 20px;
 }
 #buttonHolderClone {
-    text-align: center;
-    padding-bottom: 20px;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 .button {
-    padding: 11px 12px;
-    margin-right: 20px;
-    border-radius: .5em;
-    border-width: thin;
-    font-weight: 600;
-    cursor: pointer;
+  padding: 11px 12px;
+  margin-right: 20px;
+  border-radius: 0.5em;
+  border-width: thin;
+  font-weight: 600;
+  cursor: pointer;
 }
 #titleInput {
-    padding-top: 7px;
+  padding-top: 7px;
 }
 #titleInputClone {
-    padding-top: 7px;
+  padding-top: 7px;
 }
 
 #submission {
-    background-color: #00ADB5;
-    color: white;
-    transition: background 0.4s;
+  background-color: #00adb5;
+  color: white;
+  transition: background 0.4s;
 }
 #submission:hover {
-    background-color: #00939b;
+  background-color: #00939b;
 }
 #submissionClone {
-    background-color: #00ADB5;
-    color: white;
-    transition: background 0.4s;
+  background-color: #00adb5;
+  color: white;
+  transition: background 0.4s;
 }
 #submissionClone:hover {
-    background-color: #00939b;
+  background-color: #00939b;
 }
 
-
-#cancel{
-    transition: background 0.4s, color 0.4s;
+#cancel {
+  transition: background 0.4s, color 0.4s;
 }
 #cancel:hover {
-    color: #FFFFFF;
-    background-color: #393E46;
+  color: #ffffff;
+  background-color: #393e46;
 }
 #cancelClone {
-    transition: background 0.4s, color 0.4s;
+  transition: background 0.4s, color 0.4s;
 }
 #cancelClone:hover {
-    color: #FFFFFF;
-    background-color: #393E46;
+  color: #ffffff;
+  background-color: #393e46;
 }

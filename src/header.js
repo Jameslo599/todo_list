@@ -1,37 +1,41 @@
-import {makeElement} from './make-items.js'
+import { makeElement } from "./make-items";
 
-const content = document.getElementById('content');
+const content = document.getElementById("content");
 
-let makeNavbar = () => {
-    let navBar = makeElement({ type: 'ul', id: 'navbar', 
-    className: 'navbar'});
-    content.appendChild(navBar);
+const makeNavbar = () => {
+  const navBar = makeElement({ type: "ul", id: "navbar", className: "navbar" });
+  content.appendChild(navBar.element);
 
-    let hamburgerLink = makeElement({type: 'a', href: '#'});
-    hamburgerLink.addEventListener('click', () => {
-        document.getElementById('sidenav').classList.toggle('sidenav--active');
-        if (document.getElementById('sidenav').classList
-        .contains('widenav--active')) {
-            
-        }
-    })
-    navBar.appendChild(hamburgerLink);
+  const hamburgerLink = makeElement({ type: "a", href: "#" });
+  hamburgerLink.element.addEventListener("click", () => {
+    document.getElementById("sidenav").classList.toggle("sidenav--active");
+    if (
+      document.getElementById("sidenav").classList.contains("widenav--active")
+    ) { // nothing required
+    };
+  });
+  navBar.element.appendChild(hamburgerLink.element);
 
-    let hamburger = makeElement({type: 'i', id: 'hamburger', 
-    className: 'fal fa-bars'});
-    hamburgerLink.appendChild(hamburger);
+  const hamburger = makeElement({
+    type: "i",
+    id: "hamburger",
+    className: "fal fa-bars",
+  });
+  hamburgerLink.element.appendChild(hamburger.element);
 
-    let navLogo = makeElement({type: 'i', id: 'navLogo', 
-    className: 'far fa-check-square'});
-    navBar.appendChild(navLogo);
+  const navLogo = makeElement({
+    type: "i",
+    id: "navLogo",
+    className: "far fa-check-square",
+  });
+  navBar.element.appendChild(navLogo.element);
 
-    let navItems = makeElement({ type: 'li', id: 'nav', 
-    className: 'nav'});
-    navItems.innerHTML = 'To-Do List'
-    navBar.appendChild(navItems);
+  const navItems = makeElement({ type: "li", id: "nav", className: "nav" });
+  navItems.element.innerHTML = "To-Do List";
+  navBar.element.appendChild(navItems.element);
 
-    let taskLink = makeElement({type: 'a', href: '#'});
-    navBar.appendChild(taskLink);
+  const taskLink = makeElement({ type: "a", href: "#" });
+  navBar.element.appendChild(taskLink.element);
 };
 
-export {makeNavbar};
+export {makeNavbar, content};

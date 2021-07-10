@@ -1,137 +1,201 @@
-import {makeElement} from './make-items.js'
-import { format } from 'date-fns'
+import { format } from "date-fns";
+import { makeElement, loopElements } from "./make-items";
+import { content } from "./header"
 
-const addTask = () => {
-    let modalContainer = makeElement({ type: 'div', id: 'modalContainer', 
-    className: 'modalContainer'});
-    content.appendChild(modalContainer);
+const makeModal = () => {
+  const modalContainer = makeElement({
+    type: "div",
+    id: "modalContainer",
+    className: "modalContainer",
+  });
+  content.appendChild(modalContainer.element);
 
-    let newTask = makeElement({ type: 'form', id: 'newTask', 
-    className: 'newTask'});
-    modalContainer.appendChild(newTask);
+  const newTask = makeElement({
+    type: "form",
+    id: "newTask",
+    className: "newTask",
+  });
+  modalContainer.element.appendChild(newTask.element);
 
-    let header = makeElement({ type: 'h2', id: 'modalHeader', 
-    className: 'modalHeader'});
-    header.innerHTML = 'New Task'
-    newTask.appendChild(header);
+  const header = makeElement({
+    type: "h2",
+    id: "modalHeader",
+    className: "modalHeader",
+  });
+  header.element.innerHTML = "New Task";
+  newTask.element.appendChild(header.element);
 
-    let closeLink = makeElement({type: 'a', href: '#'});
-    header.appendChild(closeLink);
+  const closeLink = makeElement({ type: "a", href: "#" });
+  header.element.appendChild(closeLink.element);
 
-    let closeIcon = makeElement({type: 'i', id: 'closeIcon', 
-    className: 'fas fa-times'});
-    closeLink.appendChild(closeIcon);
+  const closeIcon = makeElement({
+    type: "i",
+    id: "closeIcon",
+    className: "fas fa-times",
+  });
+  closeLink.element.appendChild(closeIcon.element);
 
-    let body = makeElement({ type: 'div', id: 'modalBody', 
-    className: 'modalBody'});
-    newTask.appendChild(body);
+  const body = makeElement({
+    type: "div",
+    id: "modalBody",
+    className: "modalBody",
+  });
+  newTask.element.appendChild(body.element);
 
-    let title = makeElement({ type: 'div', id: 'modalTitle', 
-    className: 'left-side'});
-    title.innerHTML = `Title:<br>`
-    body.appendChild(title);
+  const title = makeElement({
+    type: "div",
+    id: "modalTitle",
+    className: "left-side",
+  });
+  title.element.innerHTML = `Title:<br>`;
+  body.element.appendChild(title.element);
 
-    let titleInput = makeElement({ type: 'input', id: 'titleInput', 
-    className: 'input'});
-    titleInput.type = 'text'
-    titleInput.required = true;
-    title.appendChild(titleInput);
+  const titleInput = makeElement({
+    type: "input",
+    id: "titleInput",
+    className: "input",
+  });
+  titleInput.element.type = "text";
+  titleInput.element.required = true;
+  title.element.appendChild(titleInput.element);
 
-    let date = makeElement({ type: 'div', id: 'date', 
-    className: 'right-side'});
-    date.innerHTML = `Due Date:<br>`
-    body.appendChild(date);
+  const date = makeElement({ type: "div", id: "date", className: "right-side" });
+  date.element.innerHTML = `Due Date:<br>`;
+  body.element.appendChild(date.element);
 
-    let dateInput = makeElement({ type: 'input', id: 'dateInput', 
-    className: 'input'});
-    dateInput.type = 'datetime-local'
-    dateInput.min = `${format(new Date(), 'yyyy-MM-dd\'T\'HH:mm')}`;
-    dateInput.required = true;
-    date.appendChild(dateInput);
+  const dateInput = makeElement({
+    type: "input",
+    id: "dateInput",
+    className: "input",
+  });
+  dateInput.element.type = "datetime-local";
+  dateInput.element.min = `${format(new Date(), "yyyy-MM-dd'T'HH:mm")}`;
+  dateInput.element.required = true;
+  date.element.appendChild(dateInput.element);
 
-    let description = makeElement({ type: 'div', id: 'description', 
-    className: 'left-side'});
-    description.innerHTML = `Description:<br>`
-    body.appendChild(description);
+  const description = makeElement({
+    type: "div",
+    id: "description",
+    className: "left-side",
+  });
+  description.element.innerHTML = `Description:<br>`;
+  body.element.appendChild(description.element);
 
-    let descriptionInput = makeElement({ type: 'textarea', id: 'descriptionInput', 
-    className: 'input'});
-    descriptionInput.rows = '6';
-    descriptionInput.cols = '21';
-    descriptionInput.required = true;
-    description.appendChild(descriptionInput);
+  const descriptionInput = makeElement({
+    type: "textarea",
+    id: "descriptionInput",
+    className: "input",
+  });
+  descriptionInput.rows = "6";
+  descriptionInput.cols = "21";
+  descriptionInput.required = true;
+  description.element.appendChild(descriptionInput.element);
 
-    let priority = makeElement({ type: 'div', id: 'priority', 
-    className: 'right-side'});
-    priority.innerHTML = `Priority:<br>`
-    body.appendChild(priority);
+  const priority = makeElement({
+    type: "div",
+    id: "priority",
+    className: "right-side",
+  });
+  priority.element.innerHTML = `Priority:<br>`;
+  body.element.appendChild(priority.element);
 
-    let priorityInput = makeElement({ type: 'select', id: 'priorityInput', 
-    className: 'input'});
-    priority.appendChild(priorityInput);
+  const priorityInput = makeElement({
+    type: "select",
+    id: "priorityInput",
+    className: "input",
+  });
+  priority.element.appendChild(priorityInput.element);
 
-    for (let i = 0; i <= 3; i++) {
-        let choosePriority = makeElement({ type: 'option', id: `priority${i}`});
-        priorityInput.appendChild(choosePriority);
-    };
-    document.getElementById('priority0').innerHTML = 'ASAP'
-    document.getElementById('priority1').innerHTML = 'High'
-    document.getElementById('priority2').innerHTML = 'Medium'
-    document.getElementById('priority3').innerHTML = 'Low'
+  const priorityChoice = loopElements({
+    type: "option",
+    id: "priorityChoice",
+    className: "input",
+  });
+  priorityChoice.makeOptions(3, 'priorityInput');
 
-    let project = makeElement({ type: 'div', id: `project`, name: ``,
-    className: 'right-side'});
-    project.innerHTML = `Project:<br>`
-    priority.appendChild(project);
+  document.getElementById("priorityChoice0").innerHTML = "ASAP";
+  document.getElementById("priorityChoice1").innerHTML = "High";
+  document.getElementById("priorityChoice2").innerHTML = "Medium";
+  document.getElementById("priorityChoice3").innerHTML = "Low";
 
-    let projectInput = makeElement({ type: 'select', id: 'projectInput', 
-    className: 'input'});
-    project.appendChild(projectInput);
+  const project = makeElement({
+    type: "div",
+    id: `project`,
+    name: ``,
+    className: "right-side",
+  });
+  project.element.innerHTML = `Project:<br>`;
+  priority.element.appendChild(project.element);
 
-    for (let i = 0; i <= 1; i++) {
-        let chooseProject = makeElement({ type: 'option', id: `projectChoice${i}`});
-        projectInput.appendChild(chooseProject);
-    };
-    document.getElementById('projectChoice0').innerHTML = 'Inbox'
-    document.getElementById('projectChoice1').innerHTML = 'Today'
+  const projectInput = makeElement({
+    type: "select",
+    id: "projectInput",
+    className: "input",
+  });
+  project.element.appendChild(projectInput.element);
 
-    let buttonHolderLeft = makeElement({ type: 'div', id: 'buttonHolder', 
-    className: 'left-side'});
-    body.appendChild(buttonHolderLeft);
+  const projectChoice = loopElements({
+    type: "select",
+    id: "projectChoice",
+    className: "input",
+  });
+  projectChoice.makeOptions(1, 'projectInput');
 
-    let buttonHolderRight = makeElement({ type: 'div', id: 'buttonHolder', 
-    className: 'right-side'});
-    body.appendChild(buttonHolderRight);
+//  for (let i = 0; i <= 1; i++) {
+//    let chooseProject = makeElement({
+//      type: "option",
+//      id: `projectChoice${i}`,
+//    });
+//    projectInput.appendChild(chooseProject);
+//  }
+//  document.getElementById("projectChoice0").innerHTML = "Inbox";
+//  document.getElementById("projectChoice1").innerHTML = "Today";
 
-    let cancel = makeElement({ type: 'input', id: 'cancel', 
-    className: 'button'});
-    cancel.type = 'reset'
-    buttonHolderRight.appendChild(cancel);
+  const buttonHolderLeft = makeElement({
+    type: "div",
+    id: "buttonHolder",
+    className: "left-side",
+  });
+  body.element.appendChild(buttonHolderLeft.element);
 
-    let submission = makeElement({ type: 'input', id: 'submission', 
-    className: 'button'});
-    submission.type = 'submit'
-    submission.value = 'Add Task';
-    buttonHolderRight.appendChild(submission);
+  const buttonHolderRight = makeElement({
+    type: "div",
+    id: "buttonHolder",
+    className: "right-side",
+  });
+  body.element.appendChild(buttonHolderRight.element);
 
-    return {modalContainer, cancel, closeIcon, submission};
+  const cancel = makeElement({
+    type: "input",
+    id: "cancel",
+    className: "button",
+  });
+  cancel.element.type = "reset";
+  buttonHolderRight.element.appendChild(cancel.element);
+
+  const submission = makeElement({
+    type: "input",
+    id: "submission",
+    className: "button",
+  });
+  submission.element.type = "submit";
+  submission.element.value = "Add Task";
+  buttonHolderRight.element.appendChild(submission.element);
+
+  return { modalContainer, cancel, closeIcon, submission };
 };
 
 const toggleModal = () => {
-    const {modalContainer, closeIcon} = addTask();
+  const { modalContainer, closeIcon } = makeModal();
 
-    closeIcon.onclick = function() {
-        modalContainer.style.display = 'none';
-        document.getElementById('newTask').reset();
-    };
+  closeIcon.closeModal(closeIcon.element);
 
-    window.onclick = function(event) {
-        if (event.target == modalContainer) {
-            modalContainer.style.display = 'none';
-            document.getElementById('newTask').reset();
-        };
-    };
+  window.onclick = (event) => {
+    if (event.target === modalContainer.element) {
+      modalContainer.element.style.display = "none";
+      document.getElementById("newTask").reset();
+    }
+  };
 };
 
-
-export {toggleModal}
+export { makeModal, toggleModal };
