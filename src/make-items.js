@@ -73,26 +73,7 @@ const makeElement = ({
     openModal(taskIcon.element);
   };
 
-  const toggleList = (button, list) => {
-	document.getElementById(`${button}`).addEventListener("click", () => {
-        if ((document.getElementById(`${list}`).style.display === "none")) {
-          document
-            .querySelectorAll(`h2[class^="lists"]`)
-            .forEach((element) => {
-              element.style.display = "none";
-            });
-			(document.getElementById(`${list}`)).style.display = "block"
-          document
-            .querySelectorAll(`ul[class^="list"]`)
-            .forEach((element) => {
-              element.style.display = "none";
-            });
-          document.getElementById(`${list}`).style.display =
-            "block";
-        };
-	});
-};
-  return { element, retrieveId, makeList, closeModal, toggleList };
+  return { element, retrieveId, makeList, closeModal };
 };
 
 const loopElements = ({
@@ -106,7 +87,10 @@ const loopElements = ({
 
   const makeMultiple = (startingValue, length, elementType, inputId) => {
     for (let i = startingValue; i <= length; i += 1) {
-      const choice = makeElement({ type: `${elementType}`, id: `${id + i}` }).element;
+      const choice = makeElement({
+        type: `${elementType}`,
+        id: `${id + i}`,
+      }).element;
       document.getElementById(`${inputId}`).appendChild(choice);
     }
   };

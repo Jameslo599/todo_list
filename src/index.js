@@ -17,11 +17,10 @@ makeNavbar();
 //	makeList({ id: "today", text: "Today" });
 //	document.getElementById("todayList").setAttribute("name", "Today");
 (function createSidebar() {
-	makeSidebar();
-	makeProjectList();
-	showAllProjects();
-	addProject();
-
+  makeSidebar();
+  makeProjectList();
+  showAllProjects();
+  addProject();
 })();
 
 makeModal();

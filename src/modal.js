@@ -115,7 +115,7 @@ const makeModal = () => {
     id: "priorityChoice",
     className: "input",
   });
-  priorityChoice.makeMultiple(0, 3, 'Option', "priorityInput");
+  priorityChoice.makeMultiple(0, 3, "Option", "priorityInput");
 
   document.getElementById("priorityChoice0").innerHTML = "ASAP";
   document.getElementById("priorityChoice1").innerHTML = "High";
@@ -143,7 +143,7 @@ const makeModal = () => {
     id: "projectChoice",
     className: "input",
   });
-  projectChoice.makeMultiple(0, 1, 'Option', "projectInput");
+  projectChoice.makeMultiple(0, 1, "Option", "projectInput");
 
   const buttonHolderLeft = makeElement({
     type: "div",

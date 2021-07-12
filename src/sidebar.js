@@ -16,34 +16,39 @@ const makeSidebar = () => {
     className: "project",
     href: "#",
   });
-  sideItem.makeMultiple(0, 2, 'button', 'sidenav');
+  sideItem.makeMultiple(0, 2, "button", "sidenav");
   document.getElementById("sideButton0").innerHTML = "Inbox";
 
-  const inbox =  makeElement({ type: "h1", id: `customList0`, text: `Inbox` });
-	inbox.makeList({ id: `customList0`, text: `Inbox` })
-	document.getElementById('sideButton0').addEventListener("click", () => {
-        if ((document.getElementById('customList0').style.display === "none")) {
-          document
-            .querySelectorAll(`h2[class^="lists"]`)
-            .forEach((element) => {
-              element.style.display = "none";
-            });
-			(document.getElementById('customList0')).style.display = "block"
-          document
-            .querySelectorAll(`ul[class^="list"]`)
-            .forEach((element) => {
-              element.style.display = "none";
-            });
-          document.getElementById(`customList${0}List`).style.display =
-            "block";
-        }
+  const inbox = makeElement({ type: "h1", id: `customList0`, text: `Inbox` });
+  inbox.makeList({ id: `customList0`, text: `Inbox` });
+  document.getElementById("sideButton0").addEventListener("click", () => {
+    if (document.getElementById("customList0").style.display === "none") {
+      document.querySelectorAll(`h2[class^="lists"]`).forEach((element) => {
+        element.style.display = "none";
       });
-	//inbox.toggleList(0)
+      document.getElementById("customList0").style.display = "block";
+      document.querySelectorAll(`ul[class^="list"]`).forEach((element) => {
+        element.style.display = "none";
+      });
+      document.getElementById(`customList${0}List`).style.display = "block";
+    }
+  });
 
-  const today =  makeElement({ type: "h1", id: `customList1`, text: `Today` });
-	today.makeList({ id: `customList1`, text: `Today` })
-	//today.toggleList(1)
-	document.getElementById('customList1').style.display = 'none'
+  const today = makeElement({ type: "h1", id: `customList1`, text: `Today` });
+  today.makeList({ id: `customList1`, text: `Today` });
+  document.getElementById("sideButton1").addEventListener("click", () => {
+    if (document.getElementById("customList1").style.display === "none") {
+      document.querySelectorAll(`h2[class^="lists"]`).forEach((element) => {
+        element.style.display = "none";
+      });
+      document.getElementById("customList1").style.display = "block";
+      document.querySelectorAll(`ul[class^="list"]`).forEach((element) => {
+        element.style.display = "none";
+      });
+      document.getElementById(`customList1List`).style.display = "block";
+    }
+  });
+  document.getElementById("customList1").style.display = "none";
 
   const inboxIcon = makeElement({
     type: "i",
@@ -81,7 +86,7 @@ const makeSidebar = () => {
 };
 
 const showAllProjects = () => {
-	const projectHolder = document.getElementById("sideButton2");
+  const projectHolder = document.getElementById("sideButton2");
   projectHolder.className = "sideButton2";
   projectHolder.addEventListener("click", () => {
     const projectContent = projectHolder.nextElementSibling;
@@ -97,7 +102,7 @@ const showAllProjects = () => {
 };
 
 const makeProjectList = () => {
-	const inputBar = makeElement({
+  const inputBar = makeElement({
     type: "input",
     id: `inputBar`,
     className: "inputBar",
@@ -122,68 +127,77 @@ const makeProjectList = () => {
   });
   rejectedProject.element.type = "reset";
 
-  document.getElementById('projectForm').appendChild(inputBar.element);
-  document.getElementById('projectForm').appendChild(rejectedProject.element);
-  document.getElementById('projectForm').appendChild(approvedProject.element);
+  document.getElementById("projectForm").appendChild(inputBar.element);
+  document.getElementById("projectForm").appendChild(rejectedProject.element);
+  document.getElementById("projectForm").appendChild(approvedProject.element);
 };
 
 const addProject = () => {
-	const projectArray = ['Inbox', 'Today'];
+  const projectArray = ["Inbox", "Today"];
 
-document.getElementById("projectForm").addEventListener("submit", (event) => {
+  document.getElementById("projectForm").addEventListener("submit", (event) => {
     event.preventDefault();
     const textValue = document.getElementById("inputBar").value;
     projectArray.push(textValue);
     document.getElementById("projectForm").reset();
 
     for (let i = projectArray.length - 1; i < projectArray.length; i += 1) {
-
-	const makeProject = makeElement({ type: "option", id: `${textValue + i}`, text: `${textValue}` });
-	  makeProject.element.innerHTML = `${textValue}`;
-	  document.getElementById('projectInput').appendChild(makeProject.element);
-
-    const projectButton = makeElement({
-      type: "button",
-      id: `customButton${i}`,
-      className: "project",
-      href: "#",
-    });
-    projectButton.element.innerHTML = `${textValue}`;
-	document.getElementById('projectList').appendChild(projectButton.element);
-
-    const icon = loopElements({
-      type: "i",
-      id: "icon",
-      className: "fas fa-circle",
-    });
-    document.getElementById(`customButton${i}`).prepend(icon.element);
-
-	const list =  makeElement({ type: "h1", id: `customList${i}`, text: `${textValue}` });
-    list.makeList({ id: `customList${i}`, text: `${textValue}` });
-
-    const customList = document.getElementById(`customList${i}`);
-    document.getElementById(`customList${i}`).style.display = "none";
-    document.getElementById(`customButton${i}`).addEventListener("click", () => {
-        if ((customList.style.display === "none")) {
-          document
-            .querySelectorAll(`h2[class^="lists"]`)
-            .forEach((element) => {
-              element.style.display = "none";
-            });
-		customList.style.display = "block"
-          document
-            .querySelectorAll(`ul[class^="list"]`)
-            .forEach((element) => {
-              element.style.display = "none";
-            });
-          document.getElementById(`customList${i}List`).style.display =
-            "block";
-          document
-            .getElementById(`customList${i}List`)
-            .setAttribute("name", `${textValue + i}`);
-        }
+      const makeProject = makeElement({
+        type: "option",
+        id: `${textValue + i}`,
+        text: `${textValue}`,
       });
-	}
+      makeProject.element.innerHTML = `${textValue}`;
+      document.getElementById("projectInput").appendChild(makeProject.element);
+
+      const projectButton = makeElement({
+        type: "button",
+        id: `customButton${i}`,
+        className: "project",
+        href: "#",
+      });
+      projectButton.element.innerHTML = `${textValue}`;
+      document.getElementById("projectList").appendChild(projectButton.element);
+
+      const icon = loopElements({
+        type: "i",
+        id: "icon",
+        className: "fas fa-circle",
+      });
+      document.getElementById(`customButton${i}`).prepend(icon.element);
+
+      const list = makeElement({
+        type: "h1",
+        id: `customList${i}`,
+        text: `${textValue}`,
+      });
+      list.makeList({ id: `customList${i}`, text: `${textValue}` });
+
+      const customList = document.getElementById(`customList${i}`);
+      customList.style.display = "none";
+      document
+        .getElementById(`customButton${i}`)
+        .addEventListener("click", () => {
+          if (customList.style.display === "none") {
+            document
+              .querySelectorAll(`h2[class^="lists"]`)
+              .forEach((element) => {
+                element.style.display = "none";
+              });
+            customList.style.display = "block";
+            document
+              .querySelectorAll(`ul[class^="list"]`)
+              .forEach((element) => {
+                element.style.display = "none";
+              });
+            document.getElementById(`customList${i}List`).style.display =
+              "block";
+            document
+              .getElementById(`customList${i}List`)
+              .setAttribute("name", `${textValue + i}`);
+          }
+        });
+    }
   });
 };
 
