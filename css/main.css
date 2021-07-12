@@ -101,18 +101,20 @@ body {
   margin-bottom: 20px;
   font-size: 25px;
   color: #000000;
+  background-color: #00adb5;
   display: flex;
   border: none;
   border-radius: 1em;
   overflow: hidden;
   transition: background 0.2s;
+  cursor: pointer;
 }
 
 .sidenav button:hover {
   background-color: #eeeeee;
 }
 
-.project2 {
+.sideButton2 {
   outline: none;
   background-color: inherit;
   text-align: left;
@@ -120,17 +122,17 @@ body {
   padding: 10px 0 5px 10px !important;
 }
 
-.project2::after {
+.sideButton2::after {
   content: "\25be";
   margin-left: 20px;
   padding: 0 20px 10px 0;
   transform: scale(1);
 }
 
-.project2--active {
+.sideButton2--active {
   background: #eeeeee;
 }
-.project2--active::after {
+.sideButton2--active::after {
   content: "\25b8";
 }
 
