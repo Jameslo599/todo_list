@@ -1,70 +1,95 @@
-import { makeElement } from "./make-items";
+import { loopElements, makeElement } from "./make-items";
 
 const grid = document.getElementById("grid");
 
 const makeSidebar = () => {
-  let sidebar = makeElement({
+  const sidebar = makeElement({
     type: "div",
     id: "sidenav",
     className: "sidenav",
   });
-  grid.appendChild(sidebar);
+  grid.appendChild(sidebar.element);
 
-  for (let i = 0; i <= 2; i++) {
-    let sideItem = makeElement({
-      type: "button",
-      id: `project${i}`,
-      className: "project",
-      href: "#",
-    });
-    sidebar.appendChild(sideItem);
-  }
-  document.getElementById("project0").innerHTML = "Inbox";
-  let inboxIcon = makeElement({
+  const sideItem = loopElements({
+    type: "button",
+    id: `sideButton`,
+    className: "project",
+    href: "#",
+  });
+  sideItem.makeMultiple(0, 2, 'button', 'sidenav');
+  document.getElementById("sideButton0").innerHTML = "Inbox";
+
+  const inbox =  makeElement({ type: "h1", id: `customList0`, text: `Inbox` });
+	inbox.makeList({ id: `customList0`, text: `Inbox` })
+	document.getElementById('sideButton0').addEventListener("click", () => {
+        if ((document.getElementById('customList0').style.display === "none")) {
+          document
+            .querySelectorAll(`h2[class^="lists"]`)
+            .forEach((element) => {
+              element.style.display = "none";
+            });
+			(document.getElementById('customList0')).style.display = "block"
+          document
+            .querySelectorAll(`ul[class^="list"]`)
+            .forEach((element) => {
+              element.style.display = "none";
+            });
+          document.getElementById(`customList${0}List`).style.display =
+            "block";
+        }
+      });
+	//inbox.toggleList(0)
+
+  const today =  makeElement({ type: "h1", id: `customList1`, text: `Today` });
+	today.makeList({ id: `customList1`, text: `Today` })
+	//today.toggleList(1)
+	document.getElementById('customList1').style.display = 'none'
+
+  const inboxIcon = makeElement({
     type: "i",
     id: "homeIcon",
     className: "fad fa-inbox",
   });
-  document.getElementById("project0").prepend(inboxIcon);
+  document.getElementById("sideButton0").prepend(inboxIcon.element);
 
-  document.getElementById("project1").innerHTML = "Today";
-  let todayIcon = makeElement({
+  document.getElementById("sideButton1").innerHTML = "Today";
+  const todayIcon = makeElement({
     type: "i",
     id: "calendarIcon",
     className: "fas fa-calendar-day",
   });
-  document.getElementById("project1").prepend(todayIcon);
+  document.getElementById("sideButton1").prepend(todayIcon.element);
 
-  document.getElementById("project2").innerHTML = "Projects";
-  let diagramIcon = makeElement({
+  document.getElementById("sideButton2").innerHTML = "Projects";
+  const diagramIcon = makeElement({
     type: "i",
     id: "listIcon",
     className: "fas fa-list",
   });
-  document.getElementById("project2").prepend(diagramIcon);
+  document.getElementById("sideButton2").prepend(diagramIcon.element);
 
-  let projectList = makeElement({
+  const projectList = makeElement({
     type: "div",
     id: `projectList`,
     className: "project",
     href: "#",
   });
 
-  let inputForm = makeElement({ type: "form", id: `projectForm` });
-  sidebar.appendChild(projectList);
-  projectList.appendChild(inputForm);
+  const inputForm = makeElement({ type: "form", id: `projectForm` });
+  sidebar.element.appendChild(projectList.element);
+  projectList.element.appendChild(inputForm.element);
 };
 
 const showAllProjects = () => {
-  let projectHolder = document.getElementById("project2");
-  projectHolder.className = "project2";
+	const projectHolder = document.getElementById("sideButton2");
+  projectHolder.className = "sideButton2";
   projectHolder.addEventListener("click", () => {
     const projectContent = projectHolder.nextElementSibling;
 
-    projectHolder.classList.toggle("project2--active");
+    projectHolder.classList.toggle("sideButton2--active");
 
-    if (projectHolder.classList.contains("project2--active")) {
-      projectContent.style.maxHeight = 100 + "%";
+    if (projectHolder.classList.contains("sideButton2--active")) {
+      projectContent.style.maxHeight = `100%`;
     } else {
       projectContent.style.maxHeight = 0;
     }
@@ -72,92 +97,93 @@ const showAllProjects = () => {
 };
 
 const makeProjectList = () => {
-  let inputBar = makeElement({
+	const inputBar = makeElement({
     type: "input",
     id: `inputBar`,
     className: "inputBar",
     href: "#",
   });
-  inputBar.type = "text";
-  inputBar.required = true;
-  inputBar.placeholder = "Add Project";
+  inputBar.element.type = "text";
+  inputBar.element.required = true;
+  inputBar.element.placeholder = "Add Project";
 
-  let approvedProject = makeElement({
+  const approvedProject = makeElement({
     type: "button",
     id: `approvedProject`,
     className: "fas fa-check-square",
     href: "#",
   });
-  approvedProject.type = "submit";
+  approvedProject.element.type = "submit";
 
-  let rejectedProject = makeElement({
+  const rejectedProject = makeElement({
     type: "button",
     id: "rejectedProject",
     className: "fas fa-window-close",
   });
-  rejectedProject.type = "reset";
+  rejectedProject.element.type = "reset";
 
-  document.getElementById("projectForm").appendChild(inputBar);
-  document.getElementById("projectForm").appendChild(rejectedProject);
-  document.getElementById("projectForm").appendChild(approvedProject);
+  document.getElementById('projectForm').appendChild(inputBar.element);
+  document.getElementById('projectForm').appendChild(rejectedProject.element);
+  document.getElementById('projectForm').appendChild(approvedProject.element);
 };
 
 const addProject = () => {
-  let projectArray = [];
-  document.getElementById("projectForm").addEventListener("submit", (event) => {
+	const projectArray = ['Inbox', 'Today'];
+
+document.getElementById("projectForm").addEventListener("submit", (event) => {
     event.preventDefault();
-    let textValue = document.getElementById("inputBar").value;
+    const textValue = document.getElementById("inputBar").value;
     projectArray.push(textValue);
     document.getElementById("projectForm").reset();
 
-    for (let i = projectArray.length - 1; i < projectArray.length; i++) {
-      let makeProject = makeElement({ type: "option", id: `${textValue + i}` });
-      makeProject.innerHTML = `${textValue}`;
-      document.getElementById("projectInput").appendChild(makeProject);
+    for (let i = projectArray.length - 1; i < projectArray.length; i += 1) {
 
-      let project = makeElement({
-        type: "button",
-        id: `customButton${i}`,
-        className: "project",
-        href: "#",
+	const makeProject = makeElement({ type: "option", id: `${textValue + i}`, text: `${textValue}` });
+	  makeProject.element.innerHTML = `${textValue}`;
+	  document.getElementById('projectInput').appendChild(makeProject.element);
+
+    const projectButton = makeElement({
+      type: "button",
+      id: `customButton${i}`,
+      className: "project",
+      href: "#",
+    });
+    projectButton.element.innerHTML = `${textValue}`;
+	document.getElementById('projectList').appendChild(projectButton.element);
+
+    const icon = loopElements({
+      type: "i",
+      id: "icon",
+      className: "fas fa-circle",
+    });
+    document.getElementById(`customButton${i}`).prepend(icon.element);
+
+	const list =  makeElement({ type: "h1", id: `customList${i}`, text: `${textValue}` });
+    list.makeList({ id: `customList${i}`, text: `${textValue}` });
+
+    const customList = document.getElementById(`customList${i}`);
+    document.getElementById(`customList${i}`).style.display = "none";
+    document.getElementById(`customButton${i}`).addEventListener("click", () => {
+        if ((customList.style.display === "none")) {
+          document
+            .querySelectorAll(`h2[class^="lists"]`)
+            .forEach((element) => {
+              element.style.display = "none";
+            });
+		customList.style.display = "block"
+          document
+            .querySelectorAll(`ul[class^="list"]`)
+            .forEach((element) => {
+              element.style.display = "none";
+            });
+          document.getElementById(`customList${i}List`).style.display =
+            "block";
+          document
+            .getElementById(`customList${i}List`)
+            .setAttribute("name", `${textValue + i}`);
+        }
       });
-      project.innerHTML = `${projectArray[i]}`;
-
-      let icon = makeElement({
-        type: "i",
-        id: "icon",
-        className: "fas fa-circle",
-      });
-      project.prepend(icon);
-      document.getElementById("projectList").appendChild(project);
-
-      makeList({ id: `customProject${i}`, text: `${textValue}` });
-      let customProject = document.getElementById(`customProject${i}`);
-      customProject.style.display = "none";
-      document
-        .getElementById(`customButton${i}`)
-        .addEventListener("click", () => {
-          if ((customProject.style.display = "none")) {
-            document
-              .querySelectorAll(`h2[class^="lists"]`)
-              .forEach((element) => {
-                element.style.display = "none";
-              });
-            customProject.style.display = "block";
-
-            document
-              .querySelectorAll(`ul[class^="list"]`)
-              .forEach((element) => {
-                element.style.display = "none";
-              });
-            document.getElementById(`customProject${i}List`).style.display =
-              "block";
-            document
-              .getElementById(`customProject${i}List`)
-              .setAttribute("name", `${textValue + i}`);
-          }
-        });
-    }
+	}
   });
 };
 

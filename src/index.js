@@ -5,7 +5,7 @@ import {
   showAllProjects,
   makeProjectList,
   addProject,
-} from "./sidebar.js";
+} from "./sidebar";
 import { makeModal, toggleModal } from "./modal";
 import { makeList } from "./make-items.js";
 
@@ -16,9 +16,14 @@ makeNavbar();
 //	document.getElementById("inboxList").style.display = "block";
 //	makeList({ id: "today", text: "Today" });
 //	document.getElementById("todayList").setAttribute("name", "Today");
-//	makeSidebar();
-//	showAllProjects();
-//	makeProjectList();
+(function createSidebar() {
+	makeSidebar();
+	makeProjectList();
+	showAllProjects();
+	addProject();
+
+})();
+
 makeModal();
 toggleModal();
 
@@ -29,44 +34,44 @@ toggleModal();
 //	    element.addEventListener("click", showTodo, { once: true });
 //	  });
 //	})();
-//	
+//
 //	(function goInbox() {
 //	  document.getElementById("project0").addEventListener("click", () => {
 //	    if ((document.getElementById("inbox").style.display = "none")) {
 //	      document.getElementById("today").style.display = "none";
 //	      document.getElementById("inbox").style.display = "block";
-//	
+//
 //	      let allCustom = document.querySelectorAll(`h2[id^="customProject"]`);
 //	      allCustom.forEach((element) => {
 //	        element.style.display = "none";
 //	      });
-//	
+//
 //	      let allCustomLists = document.querySelectorAll(`ul[class^="list"]`);
 //	      allCustomLists.forEach((element) => {
 //	        element.style.display = "none";
 //	      });
-//	
+//
 //	      document.getElementById("inboxList").style.display = "block";
 //	    }
 //	  });
 //	})();
-//	
+//
 //	(function goToday() {
 //	  document.getElementById("project1").addEventListener("click", () => {
 //	    if ((document.getElementById("today").style.display = "none")) {
 //	      document.getElementById("inbox").style.display = "none";
 //	      document.getElementById("today").style.display = "block";
-//	
+//
 //	      let allCustom = document.querySelectorAll(`h2[id^="customProject"]`);
 //	      allCustom.forEach((element) => {
 //	        element.style.display = "none";
 //	      });
-//	
+//
 //	      let allCustomLists = document.querySelectorAll(`ul[class^="list"]`);
 //	      allCustomLists.forEach((element) => {
 //	        element.style.display = "none";
 //	      });
-//	
+//
 //	      document.getElementById("todayList").style.display = "block";
 //	    }
 //	  });

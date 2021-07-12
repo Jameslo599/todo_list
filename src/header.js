@@ -11,8 +11,9 @@ const makeNavbar = () => {
     document.getElementById("sidenav").classList.toggle("sidenav--active");
     if (
       document.getElementById("sidenav").classList.contains("widenav--active")
-    ) { // nothing required
-    };
+    ) {
+      // nothing required
+    }
   });
   navBar.element.appendChild(hamburgerLink.element);
 
@@ -38,4 +39,4 @@ const makeNavbar = () => {
   navBar.element.appendChild(taskLink.element);
 };
 
-export {makeNavbar, content};
+export { makeNavbar, content };

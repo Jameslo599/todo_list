@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { makeElement, loopElements } from "./make-items";
-import { content } from "./header"
+import { content } from "./header";
 
 const makeModal = () => {
   const modalContainer = makeElement({
@@ -59,7 +59,11 @@ const makeModal = () => {
   titleInput.element.required = true;
   title.element.appendChild(titleInput.element);
 
-  const date = makeElement({ type: "div", id: "date", className: "right-side" });
+  const date = makeElement({
+    type: "div",
+    id: "date",
+    className: "right-side",
+  });
   date.element.innerHTML = `Due Date:<br>`;
   body.element.appendChild(date.element);
 
@@ -111,7 +115,7 @@ const makeModal = () => {
     id: "priorityChoice",
     className: "input",
   });
-  priorityChoice.makeOptions(3, 'priorityInput');
+  priorityChoice.makeMultiple(0, 3, 'Option', "priorityInput");
 
   document.getElementById("priorityChoice0").innerHTML = "ASAP";
   document.getElementById("priorityChoice1").innerHTML = "High";
@@ -139,17 +143,7 @@ const makeModal = () => {
     id: "projectChoice",
     className: "input",
   });
-  projectChoice.makeOptions(1, 'projectInput');
-
-//  for (let i = 0; i <= 1; i++) {
-//    let chooseProject = makeElement({
-//      type: "option",
-//      id: `projectChoice${i}`,
-//    });
-//    projectInput.appendChild(chooseProject);
-//  }
-//  document.getElementById("projectChoice0").innerHTML = "Inbox";
-//  document.getElementById("projectChoice1").innerHTML = "Today";
+  projectChoice.makeMultiple(0, 1, 'Option', "projectInput");
 
   const buttonHolderLeft = makeElement({
     type: "div",
