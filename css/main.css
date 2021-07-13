@@ -114,6 +114,10 @@ body {
   background-color: #eeeeee;
 }
 
+.sidenav button:focus {
+  background-color: #eeeeee;
+}
+
 .sideButton2 {
   outline: none;
   background-color: inherit;
