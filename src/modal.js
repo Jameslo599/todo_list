@@ -145,7 +145,6 @@ const makeModal = () => {
     id: "projectInput",
     className: "input",
   });
-  projectInput.element.required = true;
   project.element.appendChild(projectInput.element);
 
   const projectChoice = loopElements({

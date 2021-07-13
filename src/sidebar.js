@@ -1,6 +1,7 @@
 import { loopElements, makeElement } from "./make-items";
 
 const grid = document.getElementById("grid");
+let projectArray = ["Inbox", "Today"];
 
 const makeSidebar = () => {
   const sidebar = makeElement({
@@ -135,13 +136,12 @@ const makeProjectList = () => {
 };
 
 const addProject = () => {
-  const projectArray = ["Inbox", "Today"];
 
   document.getElementById("projectForm").addEventListener("submit", (event) => {
     event.preventDefault();
     const textValue = document.getElementById("inputBar").value;
-    projectArray.push(textValue);
     document.getElementById("projectForm").reset();
+	projectArray.push(textValue);
 
     for (let i = projectArray.length - 1; i < projectArray.length; i += 1) {
       const makeProject = makeElement({
@@ -157,9 +157,12 @@ const addProject = () => {
         type: "button",
         id: `customButton${i}`,
         className: "project",
-        href: "#",
+		href: "#",
+        text: `${textValue}`,
       });
       projectButton.element.innerHTML = `${textValue}`;
+	  localStorage.setItem("currentProjects", JSON.stringify(projectArray));
+	  console.log(projectArray);
       document.getElementById("projectList").appendChild(projectButton.element);
 
       const list = makeElement({
@@ -197,4 +200,67 @@ const addProject = () => {
   });
 };
 
-export { grid, makeSidebar, showAllProjects, makeProjectList, addProject };
+const showSavedProjects = () => {
+	if (!localStorage.getItem("currentProjects")) {
+		localStorage.setItem("currentProjects", JSON.stringify(projectArray));
+	} else {
+		projectArray = JSON.parse(localStorage.getItem("currentProjects"));
+	};
+	console.log(localStorage.currentTasks)
+	  for (let i = 2; i < projectArray.length; i += 1) {
+		const makeProject = makeElement({
+			type: "option",
+			id: `${projectArray[i] + i}`,
+			text: `${projectArray[i]}`,
+		  });
+		  makeProject.element.innerHTML = `${projectArray[i]}`;
+		  document.getElementById("projectInput").appendChild(makeProject.element);
+		  makeProject.element.setAttribute("name", `customList${i}List`);
+	
+		  const projectButton = makeElement({
+			type: "button",
+			id: `customButton${i}`,
+			className: "project",
+			href: "#",
+			text: `${projectArray[i]}`,
+		  });
+		  projectButton.element.innerHTML = `${projectArray[i]}`;
+		  localStorage.setItem("currentProjects", JSON.stringify(projectArray));
+		  console.log(projectArray);
+		  document.getElementById("projectList").appendChild(projectButton.element);
+	
+		  const list = makeElement({
+			type: "h1",
+			id: `customList${i}`,
+			text: `${projectArray[i]}`,
+		  });
+		  list.makeList({ id: `customList${i}`, text: `${projectArray[i]}` });
+	
+		  const customList = document.getElementById(`customList${i}`);
+		  customList.style.display = "none";
+		  document
+			.getElementById(`customButton${i}`)
+			.addEventListener("click", () => {
+			  if (customList.style.display === "none") {
+				document
+				  .querySelectorAll(`h2[class^="lists"]`)
+				  .forEach((element) => {
+					element.style.display = "none";
+				  });
+				customList.style.display = "block";
+				document
+				  .querySelectorAll(`ul[class^="list"]`)
+				  .forEach((element) => {
+					element.style.display = "none";
+				  });
+				document.getElementById(`customList${i}List`).style.display =
+				  "block";
+				document
+				  .getElementById(`customList${i}List`)
+				  .setAttribute("name", `${projectArray[i] + i}`);
+			  }
+			});
+	  }
+	};
+
+export { grid, makeSidebar, showAllProjects, makeProjectList, addProject, showSavedProjects };

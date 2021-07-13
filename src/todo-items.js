@@ -2,7 +2,15 @@ import { format } from "date-fns";
 import { makeTask, makeButton } from "./make-items";
 
 let submitType = 0;
-const myTasks = [];
+let myTasks = [];
+
+const setTasks = () => {
+    myTasks = JSON.parse(localStorage.getItem("currentTasks"));
+}
+const populateTodo = () => {
+localStorage.setItem("currentTasks", JSON.stringify(myTasks));
+}
+
 
 const storeInfo = (array) => {
   const projectMenuId = document.getElementById("projectInput");
@@ -140,18 +148,20 @@ const edit = () => {
   const editTask = () => {
     const openEditor = (event) => {
       event.preventDefault();
-	  submitType = 1;
+      submitType = 1;
       const specificId = event.target.parentNode.id;
-		idNumber.id = specificId.replace(/\D/g, "");
+      idNumber.id = specificId.replace(/\D/g, "");
       document.getElementById("modalContainer").style.display = "block";
-	  document.getElementById('modalHeader').childNodes[0].nodeValue = 'Update Task'
+      document.getElementById("modalHeader").childNodes[0].nodeValue =
+        "Update Task";
       document.getElementById(`submission`).value = "Update Task";
       document.getElementById(`titleInput`).value = myTasks[idNumber.id].title;
       document.getElementById(`descriptionInput`).value =
         myTasks[idNumber.id].description;
       document.getElementById(`dateInput`).value = myTasks[idNumber.id].dueDate;
-      document.getElementById(`priorityInput`).value = myTasks[idNumber.id].priority;
-	  document.getElementById(`projectInput`).value = myTasks[idNumber.id].project;
+      document.getElementById(`priorityInput`).value =
+        myTasks[idNumber.id].priority;
+      document.getElementById(`projectInput`).disabled = true;
       event.stopPropagation();
     };
 
@@ -159,119 +169,61 @@ const edit = () => {
   };
 
   const submitEdit = () => {
-      const chosenId = document.getElementById(`createdTask${idNumber.id}`);
-	  const chosenHolderId = document.getElementById(`createdHolder${idNumber.id}`);
+    const chosenId = document.getElementById(`createdTask${idNumber.id}`);
+    const chosenHolderId = document.getElementById(
+      `createdHolder${idNumber.id}`
+    );
 
-      chosenId.childNodes[0].nodeValue = `${
-        document.getElementById("titleInput").value
-      }`;
+    chosenId.childNodes[0].nodeValue = `${
+      document.getElementById("titleInput").value
+    }`;
 
-      document.getElementById(`title${idNumber.id}`).innerHTML = `Title: ${
-        document.getElementById("titleInput").value
-      }`;
-      myTasks[idNumber.id].title = document.getElementById("titleInput").value;
+    document.getElementById(`title${idNumber.id}`).innerHTML = `Title: ${
+      document.getElementById("titleInput").value
+    }`;
+    myTasks[idNumber.id].title = document.getElementById("titleInput").value;
 
-      document.getElementById(
-        `description${idNumber.id}`
-      ).innerHTML = `Description: ${
-        document.getElementById("descriptionInput").value
-      }`;
-      myTasks[idNumber.id].description =
-        document.getElementById("descriptionInput").value;
+    document.getElementById(
+      `description${idNumber.id}`
+    ).innerHTML = `Description: ${
+      document.getElementById("descriptionInput").value
+    }`;
+    myTasks[idNumber.id].description =
+      document.getElementById("descriptionInput").value;
 
-      document.getElementById(
-        `taskDate${idNumber.id}`
-      ).innerHTML = `Date: ${format(
-        new Date(myTasks[idNumber.id].dueDate),
-        "PPpp"
-      )}`;
-      myTasks[idNumber.id].dueDate =
-        document.getElementById("dateInput").value;
+    document.getElementById(
+      `taskDate${idNumber.id}`
+    ).innerHTML = `Date: ${format(
+      new Date(myTasks[idNumber.id].dueDate),
+      "PPpp"
+    )}`;
+    myTasks[idNumber.id].dueDate = document.getElementById("dateInput").value;
 
-      document.getElementById(
-        `taskPriority${idNumber.id}`
-      ).innerHTML = `Priority: ${
-        document.getElementById("priorityInput").value
-      }`;
-      myTasks[idNumber.id].priority =
-        document.getElementById("priorityInput").value;
+    document.getElementById(
+      `taskPriority${idNumber.id}`
+    ).innerHTML = `Priority: ${document.getElementById("priorityInput").value}`;
+    myTasks[idNumber.id].priority =
+      document.getElementById("priorityInput").value;
 
-	  const projectMenuId = document.getElementById("projectInput");
-	  const optionMenuId = projectMenuId.options[projectMenuId.selectedIndex];
+    if (myTasks[idNumber.id].priority === "ASAP") {
+      document.getElementById(`createdTask${idNumber.id}`).style.background =
+        "#150485";
+    } else if (myTasks[idNumber.id].priority === "High") {
+      document.getElementById(`createdTask${idNumber.id}`).style.background =
+        "#590995";
+    } else if (myTasks[idNumber.id].priority === "Medium") {
+      document.getElementById(`createdTask${idNumber.id}`).style.background =
+        "#C62A88";
+    } else if (myTasks[idNumber.id].priority === "Low") {
+      document.getElementById(`createdTask${idNumber.id}`).style.background =
+        "#03C4A1";
+    }
 
-	  myTasks[idNumber.id].project = 
-	  optionMenuId.getAttribute("name");
+    document.getElementById("modalContainer").style.display = "none";
+    document.getElementById("newTask").reset();
 
-      if (myTasks[idNumber.id].priority === "ASAP") {
-        document.getElementById(`createdTask${idNumber.id}`).style.background = "#150485";
-      } else if (myTasks[idNumber.id].priority === "High") {
-        document.getElementById(`createdTask${idNumber.id}`).style.background = "#590995";
-      } else if (myTasks[idNumber.id].priority === "Medium") {
-        document.getElementById(`createdTask${idNumber.id}`).style.background = "#C62A88";
-      } else if (myTasks[idNumber.id].priority === "Low") {
-        document.getElementById(`createdTask${idNumber.id}`).style.background = "#03C4A1";
-      }
-
-	  const cloneNodeWithEvents = ( orgNode ) => {
-
-		const orgNodeEvents = orgNode.getElementsByTagName('*');
-		const cloneNode = orgNode.cloneNode( true );
-		const cloneNodeEvents = cloneNode.getElementsByTagName('*');
-	   
-		const allEvents = ['onabort','onbeforecopy','onbeforecut','onbeforepaste','onblur','onchange','onclick',
-	   'oncontextmenu','oncopy','ondblclick','ondrag','ondragend','ondragenter', 'ondragleave' ,
-	   'ondragover','ondragstart', 'ondrop','onerror','onfocus','oninput','oninvalid','onkeydown',
-	   'onkeypress', 'onkeyup','onload','onmousedown','onmousemove','onmouseout',
-	   'onmouseover','onmouseup', 'onmousewheel', 'onpaste','onreset', 'onresize','onscroll','onsearch', 'onselect','onselectstart','onsubmit','onunload'];
-	   
-		
-		// The node root
-		for( let j=0; j<allEvents.length ; j++ ){
-		 eval('if( orgNode.'+allEvents[j]+' ) cloneNode.'+allEvents[j]+' = orgNode.'+allEvents[j]);
-		}
-	   
-		// Node descendants
-		for( let i=0 ; i<orgNodeEvents.length ; i++ ){
-		 for( let j=0; j<allEvents.length ; j++ ){
-		  eval('if( orgNodeEvents[i].'+allEvents[j]+' ) cloneNodeEvents[i].'+allEvents[j]+' = orgNodeEvents[i].'+allEvents[j]);
-		 }
-		}
-	   
-		return cloneNode;
-	   
-	   }
-
-
-	  if (myTasks[idNumber.id].project !== chosenId.parentNode.id) {
-			const clonedTask = cloneNodeWithEvents(chosenId);
-			clonedTask.onclick = () => {
-					const taskContent = document.getElementById(`createdTask${idNumber.id}`).nextElementSibling;
-					document.getElementById(`createdTask${idNumber.id}`).classList.toggle("createdTask--active");
-					if (document.getElementById(`createdTask${idNumber.id}`).classList.contains("createdTask--active")) {
-					  taskContent.style.maxHeight = `${150}px`;
-					} else {
-					  taskContent.style.maxHeight = 0;
-					}
-				  };
-			
-		    const clonedHolder = cloneNodeWithEvents(chosenHolderId);
-
-		document.getElementById(chosenId.parentNode.id).removeChild
-		(document.getElementById(`createdTask${idNumber.id}`));
-		document.getElementById(chosenHolderId.parentNode.id).removeChild
-		(document.getElementById(`createdHolder${idNumber.id}`));
-
-        document.getElementById(myTasks[idNumber.id].project).lastChild.before
-		(clonedTask);
-    document
-      .getElementById(myTasks[idNumber.id].project)
-      .lastChild.before(clonedHolder);
-};
-      document.getElementById("modalContainer").style.display = "none";
-      document.getElementById("newTask").reset();
-
-      console.log(myTasks);
-    };
+    console.log(myTasks);
+  };
   return { appendEdit, editTask, submitEdit };
 };
 
@@ -284,14 +236,14 @@ const trash = (i) => {
     clearInputs,
     changeColors,
   } = createTaskButton(i);
-  const { appendEdit, editTask} = edit();
+  const { appendEdit, editTask } = edit();
   const trashButton = makeButton({
     type: "a",
     id: "trashIcon",
     className: "far fa-trash-alt",
   });
   const appendTrash = () => newTask.appendChild(trashButton);
-  const removeTask = (num) => 
+  const removeTask = (num) =>
     trashButton.addEventListener("click", (event) => {
       event.preventDefault();
       const sibling = document.getElementById(
@@ -301,7 +253,7 @@ const trash = (i) => {
       document.getElementById(`${event.target.parentNode.id}`).remove();
       const index = myTasks.map((x) => x.id).indexOf(num);
       myTasks.splice(index, 1);
-      console.log(myTasks);
+      populateTodo();
       event.stopPropagation();
     });
   return {
@@ -314,12 +266,31 @@ const trash = (i) => {
     changeColors,
     newTask,
     appendEdit,
-	editTask,
+    editTask,
   };
 };
 
-const showTodo = () => {
+const showSavedTodo = () => {
+	if (!localStorage.getItem("currentTasks")) {
+		populateTodo();
+	 } else {
+			setTasks();
+	};
+	console.log(localStorage.currentTasks)
+	for (let i = 0; i < myTasks.length; i += 1) {
+		const taskObject = trash(i);
+		taskObject.changeColors(taskObject);
+		taskObject.appendToList();
+		taskObject.insertBeforeList(i);
+		taskObject.collapseTask(taskObject.newTask);
+		taskObject.appendEdit(taskObject.newTask);
+		taskObject.appendTrash();
+		taskObject.removeTask(i);
+		taskObject.editTask();		
+	};
+};
 
+const showTodo = () => {
   const submitInfo = (event) => {
     event.preventDefault();
     if (submitType === 0) {
@@ -330,28 +301,68 @@ const showTodo = () => {
         taskObject.appendToList();
         taskObject.insertBeforeList(i);
         taskObject.collapseTask(taskObject.newTask);
-		taskObject.appendEdit(taskObject.newTask);
+        taskObject.appendEdit(taskObject.newTask);
         taskObject.appendTrash();
         taskObject.removeTask(i);
-		taskObject.editTask();
-		document.getElementById("modalContainer").style.display = "none";
-      	document.getElementById("newTask").reset();
-        
+        taskObject.editTask();
+        document.getElementById("modalContainer").style.display = "none";
+        document.getElementById("newTask").reset();
+		populateTodo();
       }
     } else if (submitType === 1) {
-		let james = edit();
-		james.submitEdit();
+      const taskEdit = edit();
+      taskEdit.submitEdit();
+	  populateTodo()
     }
   };
 
   document.getElementById("newTask").addEventListener("submit", submitInfo);
 
-  document.querySelectorAll(`i[class^="fas fa-plus"]`).forEach((element) => 
-	element.addEventListener('click', () => {
-		submitType = 0;
-		document.getElementById('modalHeader').nodeValue = 'New Task'
-		document.getElementById(`submission`).value = "Add Task";
-	}))
+  document.querySelectorAll(`i[class^="fas fa-plus"]`).forEach((element) =>
+    element.addEventListener("click", () => {
+      submitType = 0;
+      document.getElementById("modalHeader").nodeValue = "New Task";
+      document.getElementById(`submission`).value = "Add Task";
+	  document.getElementById(`projectInput`).disabled = false;
+    })
+  );
 };
 
-export { makeTask, createTaskButton, loadTasks, showTodo };
+
+//const showSavedTodo = () => {
+//	const submitInfo = (event) => {
+//	  event.preventDefault();
+//	  if (submitType === 0) {
+//		loadTasks();
+//		for (let i = myTasks.length - 1; i < myTasks.length; i += 1) {
+//		  const taskObject = trash(i);
+//		  taskObject.changeColors(taskObject);
+//		  taskObject.appendToList();
+//		  taskObject.insertBeforeList(i);
+//		  taskObject.collapseTask(taskObject.newTask);
+//		  taskObject.appendEdit(taskObject.newTask);
+//		  taskObject.appendTrash();
+//		  taskObject.removeTask(i);
+//		  taskObject.editTask();
+//		  document.getElementById("modalContainer").style.display = "none";
+//		  document.getElementById("newTask").reset();
+//		}
+//	  } else if (submitType === 1) {
+//		let james = edit();
+//		james.submitEdit();
+//	  }
+//	};
+//
+//	document.getElementById("newTask").addEventListener("submit", submitInfo);
+//  
+//	document.querySelectorAll(`i[class^="fas fa-plus"]`).forEach((element) =>
+//	  element.addEventListener("click", () => {
+//		submitType = 0;
+//		document.getElementById("modalHeader").nodeValue = "New Task";
+//		document.getElementById(`submission`).value = "Add Task";
+//		document.getElementById(`projectInput`).disabled = false;
+//	  })
+//	);
+//  };
+
+export { makeTask, createTaskButton, loadTasks, showTodo, showSavedTodo };

@@ -313,12 +313,13 @@ body {
   font-size: 30px;
   color: #00adb5;
   font-weight: 900;
+  float: left;
 }
 
 #editIcon {
-  padding: 0 20px 0 30px;
   font-size: 29px;
   color: #00adb5;
+  float: left;
 }
 
 .modalBody {
@@ -334,7 +335,7 @@ body {
 }
 
 #dateInput {
-	width: 250px;
+  width: 250px;
 }
 
 #priorityInput {
@@ -388,8 +389,6 @@ body {
   background-color: #00939b;
 }
 
-
-
 #cancel {
   transition: background 0.4s, color 0.4s;
 }
@@ -399,20 +398,20 @@ body {
 }
 
 @media all and (max-width: 768px) {
-	.modalBody {
-		display: block;
-		padding: 0 0px 0 35px;
-	}
+  .modalBody {
+    display: block;
+    padding: 0 0px 0 35px;
+  }
 
-	#hamburger {
-		margin: 2px -30px 0 0;
-	}
-	.navbar > li {
-		padding: 3px 90px 0 10px;
-	}
+  #hamburger {
+    margin: 2px -30px 0 0;
+  }
+  .navbar > li {
+    padding: 3px 90px 0 10px;
+  }
 
-	.createdTask {
-		display: block;
+  .createdTask {
+    display: block;
     font-size: 30px;
     width: 100%;
     padding: 15px;
@@ -424,10 +423,10 @@ body {
     overflow: initial;
     font-weight: 600;
     transition: background 0.2s;
-	}
+  }
 
-	.createdHolder {
-		display: grid;
+  .createdHolder {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
     font-size: 20px;
@@ -439,5 +438,5 @@ body {
     color: #393e46;
     margin-bottom: 20px;
     overflow-x: auto;
-	}
+  }
 }
