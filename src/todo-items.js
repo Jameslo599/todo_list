@@ -5,12 +5,11 @@ let submitType = 0;
 let myTasks = [];
 
 const setTasks = () => {
-    myTasks = JSON.parse(localStorage.getItem("currentTasks"));
-}
+  myTasks = JSON.parse(localStorage.getItem("currentTasks"));
+};
 const populateTodo = () => {
-localStorage.setItem("currentTasks", JSON.stringify(myTasks));
-}
-
+  localStorage.setItem("currentTasks", JSON.stringify(myTasks));
+};
 
 const storeInfo = (array) => {
   const projectMenuId = document.getElementById("projectInput");
@@ -271,23 +270,23 @@ const trash = (i) => {
 };
 
 const showSavedTodo = () => {
-	if (!localStorage.getItem("currentTasks")) {
-		populateTodo();
-	 } else {
-			setTasks();
-	};
-	console.log(localStorage.currentTasks)
-	for (let i = 0; i < myTasks.length; i += 1) {
-		const taskObject = trash(i);
-		taskObject.changeColors(taskObject);
-		taskObject.appendToList();
-		taskObject.insertBeforeList(i);
-		taskObject.collapseTask(taskObject.newTask);
-		taskObject.appendEdit(taskObject.newTask);
-		taskObject.appendTrash();
-		taskObject.removeTask(i);
-		taskObject.editTask();		
-	};
+  if (!localStorage.getItem("currentTasks")) {
+    populateTodo();
+  } else {
+    setTasks();
+  }
+  console.log(localStorage.currentTasks);
+  for (let i = 0; i < myTasks.length; i += 1) {
+    const taskObject = trash(i);
+    taskObject.changeColors(taskObject);
+    taskObject.appendToList();
+    taskObject.insertBeforeList(i);
+    taskObject.collapseTask(taskObject.newTask);
+    taskObject.appendEdit(taskObject.newTask);
+    taskObject.appendTrash();
+    taskObject.removeTask(i);
+    taskObject.editTask();
+  }
 };
 
 const showTodo = () => {
@@ -307,12 +306,12 @@ const showTodo = () => {
         taskObject.editTask();
         document.getElementById("modalContainer").style.display = "none";
         document.getElementById("newTask").reset();
-		populateTodo();
+        populateTodo();
       }
     } else if (submitType === 1) {
       const taskEdit = edit();
       taskEdit.submitEdit();
-	  populateTodo()
+      populateTodo();
     }
   };
 
@@ -323,46 +322,9 @@ const showTodo = () => {
       submitType = 0;
       document.getElementById("modalHeader").nodeValue = "New Task";
       document.getElementById(`submission`).value = "Add Task";
-	  document.getElementById(`projectInput`).disabled = false;
+      document.getElementById(`projectInput`).disabled = false;
     })
   );
 };
-
-
-//const showSavedTodo = () => {
-//	const submitInfo = (event) => {
-//	  event.preventDefault();
-//	  if (submitType === 0) {
-//		loadTasks();
-//		for (let i = myTasks.length - 1; i < myTasks.length; i += 1) {
-//		  const taskObject = trash(i);
-//		  taskObject.changeColors(taskObject);
-//		  taskObject.appendToList();
-//		  taskObject.insertBeforeList(i);
-//		  taskObject.collapseTask(taskObject.newTask);
-//		  taskObject.appendEdit(taskObject.newTask);
-//		  taskObject.appendTrash();
-//		  taskObject.removeTask(i);
-//		  taskObject.editTask();
-//		  document.getElementById("modalContainer").style.display = "none";
-//		  document.getElementById("newTask").reset();
-//		}
-//	  } else if (submitType === 1) {
-//		let james = edit();
-//		james.submitEdit();
-//	  }
-//	};
-//
-//	document.getElementById("newTask").addEventListener("submit", submitInfo);
-//  
-//	document.querySelectorAll(`i[class^="fas fa-plus"]`).forEach((element) =>
-//	  element.addEventListener("click", () => {
-//		submitType = 0;
-//		document.getElementById("modalHeader").nodeValue = "New Task";
-//		document.getElementById(`submission`).value = "Add Task";
-//		document.getElementById(`projectInput`).disabled = false;
-//	  })
-//	);
-//  };
 
 export { makeTask, createTaskButton, loadTasks, showTodo, showSavedTodo };
