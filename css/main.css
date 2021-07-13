@@ -87,6 +87,7 @@ body {
   padding-left: 40px;
   line-height: 40px;
   margin-top: 2em;
+  box-shadow: 3px 1px 20px 0px #000000;
 }
 
 .sidenav--active {
@@ -247,7 +248,7 @@ body {
 
 .createdTask {
   display: block;
-  font-size: 20px;
+  font-size: 30px;
   width: 40%;
   padding: 15px;
   border: none;
@@ -256,13 +257,14 @@ body {
   background: #00adb5;
   color: #eeeeee;
   text-align: left;
+  font-weight: 600;
   transition: background 0.2s;
 }
 
 .createdTask::after {
   content: "\25be";
   float: right;
-  transform: scale(1.5);
+  transform: scale(1);
 }
 
 .createdTask--active {
@@ -307,17 +309,16 @@ body {
 }
 
 #trashIcon {
-  float: right;
   padding: 0 20px;
   font-size: 30px;
-  color: #ff4136;
+  color: #00adb5;
+  font-weight: 900;
 }
 
 #editIcon {
-  float: right;
-  padding: 0 20px;
-  font-size: 30px;
-  color: #ff4136;
+  padding: 0 20px 0 30px;
+  font-size: 29px;
+  color: #00adb5;
 }
 
 .modalBody {
@@ -329,29 +330,22 @@ body {
 
 #descriptionInput {
   width: 200px;
+  height: 115px;
 }
-#descriptionInputClone {
-  width: 200px;
+
+#dateInput {
+	width: 250px;
 }
 
 #priorityInput {
-  width: 260px;
-}
-#priorityInputClone {
   width: 260px;
 }
 
 #project {
   margin-top: 10px;
 }
-#projectClone {
-  margin-top: 10px;
-}
 
 #projectInput {
-  width: 260px;
-}
-#projectInputClone {
   width: 260px;
 }
 
@@ -372,10 +366,6 @@ body {
   text-align: center;
   padding-bottom: 20px;
 }
-#buttonHolderClone {
-  text-align: center;
-  padding-bottom: 20px;
-}
 
 .button {
   padding: 11px 12px;
@@ -388,9 +378,6 @@ body {
 #titleInput {
   padding-top: 7px;
 }
-#titleInputClone {
-  padding-top: 7px;
-}
 
 #submission {
   background-color: #00adb5;
@@ -400,14 +387,8 @@ body {
 #submission:hover {
   background-color: #00939b;
 }
-#submissionClone {
-  background-color: #00adb5;
-  color: white;
-  transition: background 0.4s;
-}
-#submissionClone:hover {
-  background-color: #00939b;
-}
+
+
 
 #cancel {
   transition: background 0.4s, color 0.4s;
@@ -416,10 +397,47 @@ body {
   color: #ffffff;
   background-color: #393e46;
 }
-#cancelClone {
-  transition: background 0.4s, color 0.4s;
-}
-#cancelClone:hover {
-  color: #ffffff;
-  background-color: #393e46;
+
+@media all and (max-width: 768px) {
+	.modalBody {
+		display: block;
+		padding: 0 0px 0 35px;
+	}
+
+	#hamburger {
+		margin: 2px -30px 0 0;
+	}
+	.navbar > li {
+		padding: 3px 90px 0 10px;
+	}
+
+	.createdTask {
+		display: block;
+    font-size: 30px;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    background: #00adb5;
+    color: #eeeeee;
+    overflow: initial;
+    font-weight: 600;
+    transition: background 0.2s;
+	}
+
+	.createdHolder {
+		display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 600;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s;
+    background: #00adb5;
+    color: #393e46;
+    margin-bottom: 20px;
+    overflow-x: auto;
+	}
 }
