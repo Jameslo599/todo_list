@@ -162,13 +162,6 @@ const addProject = () => {
       projectButton.element.innerHTML = `${textValue}`;
       document.getElementById("projectList").appendChild(projectButton.element);
 
-      const icon = loopElements({
-        type: "i",
-        id: "icon",
-        className: "fas fa-circle",
-      });
-      document.getElementById(`customButton${i}`).prepend(icon.element);
-
       const list = makeElement({
         type: "h1",
         id: `customList${i}`,

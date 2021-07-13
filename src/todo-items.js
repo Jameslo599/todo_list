@@ -144,12 +144,14 @@ const edit = () => {
       const specificId = event.target.parentNode.id;
 		idNumber.id = specificId.replace(/\D/g, "");
       document.getElementById("modalContainer").style.display = "block";
+	  document.getElementById('modalHeader').childNodes[0].nodeValue = 'Update Task'
       document.getElementById(`submission`).value = "Update Task";
       document.getElementById(`titleInput`).value = myTasks[idNumber.id].title;
       document.getElementById(`descriptionInput`).value =
         myTasks[idNumber.id].description;
       document.getElementById(`dateInput`).value = myTasks[idNumber.id].dueDate;
       document.getElementById(`priorityInput`).value = myTasks[idNumber.id].priority;
+	  document.getElementById(`projectInput`).value = myTasks[idNumber.id].project;
       event.stopPropagation();
     };
 
@@ -158,6 +160,7 @@ const edit = () => {
 
   const submitEdit = () => {
       const chosenId = document.getElementById(`createdTask${idNumber.id}`);
+	  const chosenHolderId = document.getElementById(`createdHolder${idNumber.id}`);
 
       chosenId.childNodes[0].nodeValue = `${
         document.getElementById("titleInput").value
@@ -193,6 +196,12 @@ const edit = () => {
       myTasks[idNumber.id].priority =
         document.getElementById("priorityInput").value;
 
+	  const projectMenuId = document.getElementById("projectInput");
+	  const optionMenuId = projectMenuId.options[projectMenuId.selectedIndex];
+
+	  myTasks[idNumber.id].project = 
+	  optionMenuId.getAttribute("name");
+
       if (myTasks[idNumber.id].priority === "ASAP") {
         document.getElementById(`createdTask${idNumber.id}`).style.background = "#150485";
       } else if (myTasks[idNumber.id].priority === "High") {
@@ -203,6 +212,61 @@ const edit = () => {
         document.getElementById(`createdTask${idNumber.id}`).style.background = "#03C4A1";
       }
 
+	  const cloneNodeWithEvents = ( orgNode ) => {
+
+		const orgNodeEvents = orgNode.getElementsByTagName('*');
+		const cloneNode = orgNode.cloneNode( true );
+		const cloneNodeEvents = cloneNode.getElementsByTagName('*');
+	   
+		const allEvents = ['onabort','onbeforecopy','onbeforecut','onbeforepaste','onblur','onchange','onclick',
+	   'oncontextmenu','oncopy','ondblclick','ondrag','ondragend','ondragenter', 'ondragleave' ,
+	   'ondragover','ondragstart', 'ondrop','onerror','onfocus','oninput','oninvalid','onkeydown',
+	   'onkeypress', 'onkeyup','onload','onmousedown','onmousemove','onmouseout',
+	   'onmouseover','onmouseup', 'onmousewheel', 'onpaste','onreset', 'onresize','onscroll','onsearch', 'onselect','onselectstart','onsubmit','onunload'];
+	   
+		
+		// The node root
+		for( let j=0; j<allEvents.length ; j++ ){
+		 eval('if( orgNode.'+allEvents[j]+' ) cloneNode.'+allEvents[j]+' = orgNode.'+allEvents[j]);
+		}
+	   
+		// Node descendants
+		for( let i=0 ; i<orgNodeEvents.length ; i++ ){
+		 for( let j=0; j<allEvents.length ; j++ ){
+		  eval('if( orgNodeEvents[i].'+allEvents[j]+' ) cloneNodeEvents[i].'+allEvents[j]+' = orgNodeEvents[i].'+allEvents[j]);
+		 }
+		}
+	   
+		return cloneNode;
+	   
+	   }
+
+
+	  if (myTasks[idNumber.id].project !== chosenId.parentNode.id) {
+			const clonedTask = cloneNodeWithEvents(chosenId);
+			clonedTask.onclick = () => {
+					const taskContent = document.getElementById(`createdTask${idNumber.id}`).nextElementSibling;
+					document.getElementById(`createdTask${idNumber.id}`).classList.toggle("createdTask--active");
+					if (document.getElementById(`createdTask${idNumber.id}`).classList.contains("createdTask--active")) {
+					  taskContent.style.maxHeight = `${150}px`;
+					} else {
+					  taskContent.style.maxHeight = 0;
+					}
+				  };
+			
+		    const clonedHolder = cloneNodeWithEvents(chosenHolderId);
+
+		document.getElementById(chosenId.parentNode.id).removeChild
+		(document.getElementById(`createdTask${idNumber.id}`));
+		document.getElementById(chosenHolderId.parentNode.id).removeChild
+		(document.getElementById(`createdHolder${idNumber.id}`));
+
+        document.getElementById(myTasks[idNumber.id].project).lastChild.before
+		(clonedTask);
+    document
+      .getElementById(myTasks[idNumber.id].project)
+      .lastChild.before(clonedHolder);
+};
       document.getElementById("modalContainer").style.display = "none";
       document.getElementById("newTask").reset();
 
@@ -227,7 +291,7 @@ const trash = (i) => {
     className: "far fa-trash-alt",
   });
   const appendTrash = () => newTask.appendChild(trashButton);
-  const removeTask = (num) =>
+  const removeTask = (num) => 
     trashButton.addEventListener("click", (event) => {
       event.preventDefault();
       const sibling = document.getElementById(
@@ -266,9 +330,9 @@ const showTodo = () => {
         taskObject.appendToList();
         taskObject.insertBeforeList(i);
         taskObject.collapseTask(taskObject.newTask);
+		taskObject.appendEdit(taskObject.newTask);
         taskObject.appendTrash();
         taskObject.removeTask(i);
-        taskObject.appendEdit(taskObject.newTask);
 		taskObject.editTask();
 		document.getElementById("modalContainer").style.display = "none";
       	document.getElementById("newTask").reset();
@@ -285,6 +349,7 @@ const showTodo = () => {
   document.querySelectorAll(`i[class^="fas fa-plus"]`).forEach((element) => 
 	element.addEventListener('click', () => {
 		submitType = 0;
+		document.getElementById('modalHeader').nodeValue = 'New Task'
 		document.getElementById(`submission`).value = "Add Task";
 	}))
 };
