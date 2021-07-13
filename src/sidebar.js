@@ -30,7 +30,8 @@ const makeSidebar = () => {
       document.querySelectorAll(`ul[class^="list"]`).forEach((element) => {
         element.style.display = "none";
       });
-      document.getElementById(`customList${0}List`).style.display = "block";
+      document.getElementById(`customList0List`).style.display = "block";
+      document.getElementById(`customList0List`).setAttribute = `Inbox0`;
     }
   });
 
@@ -49,6 +50,7 @@ const makeSidebar = () => {
     }
   });
   document.getElementById("customList1").style.display = "none";
+  document.getElementById(`customList1List`).setAttribute("name", `Today1`);
 
   const inboxIcon = makeElement({
     type: "i",
@@ -149,6 +151,7 @@ const addProject = () => {
       });
       makeProject.element.innerHTML = `${textValue}`;
       document.getElementById("projectInput").appendChild(makeProject.element);
+      makeProject.element.setAttribute("name", `customList${i}List`);
 
       const projectButton = makeElement({
         type: "button",

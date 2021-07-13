@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { makeElement, loopElements } from "./make-items";
 import { content } from "./header";
 
+const choiceArray = ["CustomList0List", "CustomList1List"];
 const makeModal = () => {
   const modalContainer = makeElement({
     type: "div",
@@ -9,6 +10,13 @@ const makeModal = () => {
     className: "modalContainer",
   });
   content.appendChild(modalContainer.element);
+
+  window.onclick = (event) => {
+    if (event.target === modalContainer.element) {
+      modalContainer.element.style.display = "none";
+      document.getElementById("newTask").reset();
+    }
+  };
 
   const newTask = makeElement({
     type: "form",
@@ -33,6 +41,7 @@ const makeModal = () => {
     id: "closeIcon",
     className: "fas fa-times",
   });
+  closeIcon.closeModal(closeIcon.element);
   closeLink.element.appendChild(closeIcon.element);
 
   const body = makeElement({
@@ -90,9 +99,9 @@ const makeModal = () => {
     id: "descriptionInput",
     className: "input",
   });
-  descriptionInput.rows = "6";
-  descriptionInput.cols = "21";
-  descriptionInput.required = true;
+  descriptionInput.element.rows = "6";
+  descriptionInput.element.cols = "21";
+  descriptionInput.element.required = true;
   description.element.appendChild(descriptionInput.element);
 
   const priority = makeElement({
@@ -144,6 +153,14 @@ const makeModal = () => {
     className: "input",
   });
   projectChoice.makeMultiple(0, 1, "Option", "projectInput");
+  document.getElementById("projectChoice0").innerHTML = "Inbox";
+  document.getElementById("projectChoice1").innerHTML = "Today";
+  document
+    .getElementById("projectChoice0")
+    .setAttribute("name", "customList0List");
+  document
+    .getElementById("projectChoice1")
+    .setAttribute("name", "customList1List");
 
   const buttonHolderLeft = makeElement({
     type: "div",
@@ -179,17 +196,4 @@ const makeModal = () => {
   return { modalContainer, cancel, closeIcon, submission };
 };
 
-const toggleModal = () => {
-  const { modalContainer, closeIcon } = makeModal();
-
-  closeIcon.closeModal(closeIcon.element);
-
-  window.onclick = (event) => {
-    if (event.target === modalContainer.element) {
-      modalContainer.element.style.display = "none";
-      document.getElementById("newTask").reset();
-    }
-  };
-};
-
-export { makeModal, toggleModal };
+export { makeModal, choiceArray };

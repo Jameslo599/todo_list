@@ -1,4 +1,4 @@
-import { loadTasks, showTodo } from "./todo-items.js";
+import { showTodo } from "./todo-items";
 import { makeNavbar } from "./header";
 import {
   makeSidebar,
@@ -6,10 +6,8 @@ import {
   makeProjectList,
   addProject,
 } from "./sidebar";
-import { makeModal, toggleModal } from "./modal";
-import { makeList } from "./make-items.js";
+import { makeModal } from "./modal";
 
-makeNavbar();
 //	makeList({ id: "inbox", text: "Inbox" });
 //	document.getElementById("inboxList").setAttribute("name", "Inbox");
 //	document.getElementById("inbox").style.display = "block";
@@ -17,14 +15,14 @@ makeNavbar();
 //	makeList({ id: "today", text: "Today" });
 //	document.getElementById("todayList").setAttribute("name", "Today");
 (function createSidebar() {
+  makeNavbar();
   makeSidebar();
   makeProjectList();
   showAllProjects();
   addProject();
+  makeModal();
+  showTodo();
 })();
-
-makeModal();
-toggleModal();
 
 //	(function submitTodo() {
 //	  let plusButton = document.querySelectorAll(".fa-plus");

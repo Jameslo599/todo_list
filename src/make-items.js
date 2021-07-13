@@ -125,4 +125,17 @@ const makeTask = ({ id, title, description, dueDate, priority, project }) => ({
   },
 });
 
-export { makeElement, makeTask, loopElements };
+const makeButton = ({
+  type = "",
+  id = "",
+  className = "",
+  href = "#",
+} = {}) => {
+  const element = document.createElement(type);
+  element.setAttribute("id", id);
+  element.setAttribute("class", className);
+  element.setAttribute("href", href);
+  return element;
+};
+
+export { makeElement, makeTask, loopElements, makeButton };
