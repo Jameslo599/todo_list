@@ -1,16 +1,22 @@
 import { format } from "date-fns";
 import { makeTask, makeButton } from "./make-items";
 
+// 0 for new tasks, 1 for task edits
 let submitType = 0;
+
+// Houses all created tasks
 let myTasks = [];
 
+// Retrieves saved tasks on local storage
 const setTasks = () => {
   myTasks = JSON.parse(localStorage.getItem("currentTasks"));
 };
+// Saves tasks on local storage
 const populateTodo = () => {
   localStorage.setItem("currentTasks", JSON.stringify(myTasks));
 };
 
+// Collects information from user inputs to create new task
 const storeInfo = (array) => {
   const projectMenuId = document.getElementById("projectInput");
   const optionMenuId = projectMenuId.options[projectMenuId.selectedIndex];
@@ -33,6 +39,7 @@ const loadTasks = () => {
   info.pushInfo();
 };
 
+// Generates completed task
 const createTaskButton = (i) => {
   const title = makeButton({
     type: "p",
@@ -129,8 +136,10 @@ const createTaskButton = (i) => {
   };
 };
 
-let idNumber = {};
+// Holds idNumber value that is create inside function in global scope to be used in other functions
+const idNumber = {};
 
+// Creates edit button with associated methods
 const edit = () => {
   const editButton = makeButton({
     type: "a",
@@ -220,12 +229,11 @@ const edit = () => {
 
     document.getElementById("modalContainer").style.display = "none";
     document.getElementById("newTask").reset();
-
-    console.log(myTasks);
   };
   return { appendEdit, editTask, submitEdit };
 };
 
+// Creates trash button with associated methods
 const trash = (i) => {
   const {
     newTask,
@@ -269,13 +277,13 @@ const trash = (i) => {
   };
 };
 
+// Retrieves saved tasks on window load
 const showSavedTodo = () => {
   if (!localStorage.getItem("currentTasks")) {
     populateTodo();
   } else {
     setTasks();
   }
-  console.log(localStorage.currentTasks);
   for (let i = 0; i < myTasks.length; i += 1) {
     const taskObject = trash(i);
     taskObject.changeColors(taskObject);
@@ -289,6 +297,7 @@ const showSavedTodo = () => {
   }
 };
 
+// Displays user submitted information on the task button
 const showTodo = () => {
   const submitInfo = (event) => {
     event.preventDefault();

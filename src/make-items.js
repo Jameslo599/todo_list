@@ -1,5 +1,6 @@
 const grid = document.getElementById("grid");
 
+// Generates DOM elements with desired methods
 const makeElement = ({
   type = "",
   id = "",
@@ -76,6 +77,7 @@ const makeElement = ({
   return { element, retrieveId, makeList, closeModal };
 };
 
+// Generates DOM elements that need to be looped.
 const loopElements = ({
   type = "",
   id = "",
@@ -97,6 +99,7 @@ const loopElements = ({
   return { ...prototype, makeMultiple };
 };
 
+// Generates task objects
 const makeTask = ({ id, title, description, dueDate, priority, project }) => ({
   id,
   title,
@@ -125,6 +128,7 @@ const makeTask = ({ id, title, description, dueDate, priority, project }) => ({
   },
 });
 
+// Generates DOM elements that don't require namespacing for ease of use
 const makeButton = ({
   type = "",
   id = "",

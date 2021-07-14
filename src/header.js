@@ -2,6 +2,7 @@ import { makeElement } from "./make-items";
 
 const content = document.getElementById("content");
 
+// Generates complete navbar
 const makeNavbar = () => {
   const navBar = makeElement({ type: "ul", id: "navbar", className: "navbar" });
   content.appendChild(navBar.element);

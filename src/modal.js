@@ -2,7 +2,10 @@ import { format } from "date-fns";
 import { makeElement, loopElements } from "./make-items";
 import { content } from "./header";
 
+// Houses project names to match with the selected project user wants task to go into
 const choiceArray = ["CustomList0List", "CustomList1List"];
+
+// Generates modal to input task information
 const makeModal = () => {
   const modalContainer = makeElement({
     type: "div",

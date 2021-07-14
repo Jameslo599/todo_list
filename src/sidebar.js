@@ -1,8 +1,11 @@
 import { loopElements, makeElement } from "./make-items";
 
 const grid = document.getElementById("grid");
+
+// Houses names for all created project folders
 let projectArray = ["Inbox", "Today"];
 
+// Generates complete sidebar
 const makeSidebar = () => {
   const sidebar = makeElement({
     type: "div",
@@ -88,6 +91,7 @@ const makeSidebar = () => {
   projectList.element.appendChild(inputForm.element);
 };
 
+// Creates a button that contains text input to create custom projects
 const showAllProjects = () => {
   const projectHolder = document.getElementById("sideButton2");
   projectHolder.className = "sideButton2";
@@ -104,6 +108,7 @@ const showAllProjects = () => {
   });
 };
 
+// Creates project input text bar
 const makeProjectList = () => {
   const inputBar = makeElement({
     type: "input",
@@ -135,6 +140,7 @@ const makeProjectList = () => {
   document.getElementById("projectForm").appendChild(approvedProject.element);
 };
 
+// Generates new project button along with associated titles and lists
 const addProject = () => {
   document.getElementById("projectForm").addEventListener("submit", (event) => {
     event.preventDefault();
@@ -161,7 +167,6 @@ const addProject = () => {
       });
       projectButton.element.innerHTML = `${textValue}`;
       localStorage.setItem("currentProjects", JSON.stringify(projectArray));
-      console.log(projectArray);
       document.getElementById("projectList").appendChild(projectButton.element);
 
       const list = makeElement({
@@ -199,13 +204,13 @@ const addProject = () => {
   });
 };
 
+// Generates any projects on window load that are saved in local storage
 const showSavedProjects = () => {
   if (!localStorage.getItem("currentProjects")) {
     localStorage.setItem("currentProjects", JSON.stringify(projectArray));
   } else {
     projectArray = JSON.parse(localStorage.getItem("currentProjects"));
   }
-  console.log(localStorage.currentTasks);
   for (let i = 2; i < projectArray.length; i += 1) {
     const makeProject = makeElement({
       type: "option",
@@ -225,7 +230,6 @@ const showSavedProjects = () => {
     });
     projectButton.element.innerHTML = `${projectArray[i]}`;
     localStorage.setItem("currentProjects", JSON.stringify(projectArray));
-    console.log(projectArray);
     document.getElementById("projectList").appendChild(projectButton.element);
 
     const list = makeElement({
